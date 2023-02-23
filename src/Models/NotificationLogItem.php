@@ -15,6 +15,7 @@ class NotificationLogItem extends Model
 
     protected $casts = [
         'extra' => 'array',
+        'anonymous_notifiable_properties' => 'array',
         'send_at' => 'datetime',
     ];
 

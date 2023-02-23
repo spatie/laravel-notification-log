@@ -2,27 +2,49 @@
 
 namespace Spatie\NotificationLog\Actions;
 
+use Illuminate\Console\Scheduling\Event;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Events\NotificationSending;
 use Spatie\NotificationLog\Exceptions\InvalidExtraContent;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Support\Config;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\AnonymousNotifiable;
 
 class ConvertNotificationSendingEventToLogItem
 {
     public function execute(NotificationSending $event): ?NotificationLogItem
     {
-        /** @var \Illuminate\Notifications\Notifiable $notifiable */
-        $notifiable = $event->notifiable;
-
         $modelClass = Config::modelClass();
 
         return $modelClass::create([
             'notification_type' => $this->getNotificationType($event),
-            'notifiable_type' => $notifiable->getMorphClass(),
-            'notifiable_id'  => $notifiable->id,
+            'notifiable_type' => $this->getNotifiableType($event),
+            'notifiable_id'  =>  $this->getNotifiableKey($event),
             'channel' => $event->channel,
             'extra' => $this->getExtra($event),
+            'anonymous_notifiable_properties' => $this->getAnonymousNotifiableProperties($event)
         ]);
+    }
+
+    protected function getNotifiableType(NotificationSending $event): ?string
+    {
+        /** @var Model|AnonymousNotifiable $notifiable */
+        $notifiable = $event->notifiable;
+
+        return $notifiable instanceof Model
+            ?  $notifiable->getMorphClass()
+            : null;
+    }
+
+    protected function getNotifiableKey(NotificationSending $event): mixed
+    {
+        /** @var Model|AnonymousNotifiable $notifiable */
+        $notifiable = $event->notifiable;
+
+        return $notifiable instanceof Model
+            ?  $notifiable->getKey()
+            : null;
     }
 
     protected function getNotificationType(NotificationSending $event): string
@@ -56,5 +78,14 @@ class ConvertNotificationSendingEventToLogItem
         }
 
         return [];
+    }
+
+    protected function getAnonymousNotifiableProperties(NotificationSending $event): ?array
+    {
+        if (! $event->notifiable instanceof AnonymousNotifiable) {
+            return null;
+        }
+
+        return $event->notifiable->routes;
     }
 }

@@ -66,3 +66,13 @@ it('can log extra information', function() {
 it('will throw an exception if the extra method returns something invalid', function() {
     Notification::send($this->user, new InvalidLogExtraNotification());
 })->throws(InvalidExtraContent::class);
+
+it('can handle an on-demand notification', function() {
+    Notification::route('mail', 'john@example.com')->notify(new TestNotification());
+
+    $logItem = NotificationLogItem::first();
+
+    expect($logItem->anonymous_notifiable_properties)->toBe([
+        'mail' => 'john@example.com',
+    ]);
+});

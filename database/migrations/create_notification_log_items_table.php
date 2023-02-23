@@ -11,14 +11,15 @@ return new class extends Migration
         Schema::create('notification_log_items', function (Blueprint $table) {
             $table->id();
             $table->string('notification_type');
-            $table->unsignedBigInteger('notifiable_id');
-            $table->string('notifiable_type');
+            $table->unsignedBigInteger('notifiable_id')->nullable();
+            $table->string('notifiable_type')->nullable();
             $table->string('channel');
             $table->string('fingerprint')->nullable();
             $table->json('extra')->nullable();
-            $table->dateTime('sent_at')->nullable();
             $table->text('exception_message')->nullable();
             $table->string('locale')->nullable();
+            $table->json('anonymous_notifiable_properties')->nullable();
+            $table->dateTime('sent_at')->nullable();
             $table->timestamps();
         });
     }
