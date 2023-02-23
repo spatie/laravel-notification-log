@@ -60,7 +60,7 @@
                 "Spatie\\NotificationLog\\NotificationLogServiceProvider"
             ],
             "aliases": {
-                "NotificationLog": "Spatie\\NotificationLog\\Facades\\NotificationLog"
+                "NotificationLog": "NotificationHistory"
             }
         }
     },

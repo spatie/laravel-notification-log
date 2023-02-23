@@ -3,6 +3,8 @@
 namespace Spatie\NotificationLog\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\NotificationLog\NotificationLogServiceProvider;
 
@@ -12,8 +14,10 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
+        config()->set('mail.driver', 'log');
+
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\NotificationLog\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Spatie\\NotificationLog\\Tests\\TestSupport\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
@@ -28,9 +32,13 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-notification-log_table.php.stub';
-        $migration->up();
-        */
+        Schema::create('users', function(Blueprint $table) {
+            $table->id();
+
+            $table->string('email');
+            $table->string('password');
+
+            $table->timestamps();
+        });
     }
 }

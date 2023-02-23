@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @see \Spatie\NotificationLog\NotificationLog
  */
-class NotificationLog extends Facade
+class NotificationHistory extends Facade
 {
     protected static function getFacadeAccessor()
     {
