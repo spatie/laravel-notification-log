@@ -10,7 +10,7 @@ class NotificationEventSubscriber
 {
     public function handleNotificationSending(NotificationSending $event): void
     {
-
+        dd($event);
     }
 
     public function handleNotificationSent(NotificationSent $event): void
