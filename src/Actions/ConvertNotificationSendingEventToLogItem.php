@@ -15,7 +15,7 @@ class ConvertNotificationSendingEventToLogItem
 {
     public function execute(NotificationSending $event): ?NotificationLogItem
     {
-        $modelClass = Config::modelClass();
+        $modelClass = Config::notificationLogModelClass();
 
         return $modelClass::create([
             'notification_type' => $this->getNotificationType($event),
@@ -50,7 +50,13 @@ class ConvertNotificationSendingEventToLogItem
 
     protected function getNotificationType(NotificationSending $event): string
     {
-        return get_class($event->notification);
+        $notification = $event->notification;
+
+        if (method_exists($notification, 'logType')) {
+            return $notification->logType($event);
+        }
+
+        return get_class($notification);
     }
 
     /**

@@ -7,6 +7,7 @@ use Spatie\NotificationLog\Tests\TestSupport\Channels\DummyChannel\DummyChannel;
 use Spatie\NotificationLog\Tests\TestSupport\Channels\DummyChannel\DummyChannelException;
 use Spatie\NotificationLog\Tests\TestSupport\Models\User;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\ChannelWillThrowExceptionNotification;
+use Spatie\NotificationLog\Tests\TestSupport\Notifications\CustomTypeNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\FingerprintNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\InvalidLogExtraNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\LogExtraNotification;
@@ -99,4 +100,13 @@ it('will log an unsent notification when there was a problem sending it', functi
     $logItem = NotificationLogItem::first();
 
     expect($logItem->sent_at)->toBeNull();
+});
+
+it('can log a custom notification type', function() {
+    $this->user->notify(new CustomTypeNotification());
+
+    $logItem = NotificationLogItem::first();
+
+    expect($logItem->notification_type)->toBe('customType');
+
 });

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('fingerprint')->nullable();
             $table->json('extra')->nullable();
             $table->text('exception_message')->nullable();
-            $table->string('locale')->nullable();
             $table->json('anonymous_notifiable_properties')->nullable();
             $table->dateTime('sent_at')->nullable();
             $table->timestamps();

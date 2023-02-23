@@ -12,7 +12,7 @@ class Config
     /**
      * @return class-string<NotificationLogItem>
      */
-    public static function modelClass(): string
+    public static function notificationLogModelClass(): string
     {
         return config('notification-log.model');
     }

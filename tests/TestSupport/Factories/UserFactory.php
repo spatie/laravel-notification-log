@@ -10,7 +10,7 @@ class UserFactory extends Factory
 {
     public $model = User::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'email' => fake()->unique()->safeEmail(),
