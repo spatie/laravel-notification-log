@@ -3,7 +3,7 @@ title: Installation & setup
 weight: 4
 ---
 
-ou can install the package via composer:
+You can install the package via composer:
 
 ```bash
 composer require spatie/laravel-notification-log
