@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Notification;
 use Spatie\NotificationLog\Exceptions\InvalidExtraContent;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Tests\TestSupport\Channels\DummyChannel\DummyChannel;
+use Spatie\NotificationLog\Tests\TestSupport\Channels\DummyChannel\DummyChannelException;
 use Spatie\NotificationLog\Tests\TestSupport\Models\User;
+use Spatie\NotificationLog\Tests\TestSupport\Notifications\ChannelWillThrowExceptionNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\FingerprintNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\InvalidLogExtraNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\LogExtraNotification;
@@ -84,4 +86,17 @@ it('can handle a notification with a fingerprint', function() {
     $logItem = NotificationLogItem::first();
 
     expect($logItem->fingerprint)->toBe('this-is-a-fingerprint');
+});
+
+it('will log an unsent notification when there was a problem sending it', function() {
+    try {
+        $this->user->notify(new ChannelWillThrowExceptionNotification());
+
+    } catch (DummyChannelException) {
+
+    }
+
+    $logItem = NotificationLogItem::first();
+
+    expect($logItem->sent_at)->toBeNull();
 });
