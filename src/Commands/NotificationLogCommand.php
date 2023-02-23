@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Spatie\NotificationLog\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class NotificationLogCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-notification-log';
 
     public $description = 'My command';
 
