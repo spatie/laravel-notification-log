@@ -4,7 +4,6 @@ namespace Spatie\NotificationLog;
 
 use Illuminate\Notifications\Events\NotificationSending;
 use Illuminate\Notifications\Events\NotificationSent;
-use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Support\Config;
 use WeakMap;
 
@@ -14,14 +13,14 @@ class NotificationEventSubscriber
 
     public function __construct()
     {
-        if ( ! self::$sentNotifications)  {
+        if (! self::$sentNotifications) {
             self::$sentNotifications = new WeakMap();
         }
     }
 
     public function handleNotificationSending(NotificationSending $event): void
     {
-        if ( ! $this->shouldLog($event)) {
+        if (! $this->shouldLog($event)) {
             return;
         }
 
@@ -38,7 +37,7 @@ class NotificationEventSubscriber
 
     public function handleNotificationSent(NotificationSent $event): void
     {
-        if ( ! self::$sentNotifications->offsetExists($event->notification)) {
+        if (! self::$sentNotifications->offsetExists($event->notification)) {
             return;
         }
 

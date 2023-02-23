@@ -32,11 +32,11 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        $migration = include __DIR__ . '/../../database/migrations/create_notification_log_items_table.php';
+        $migration = include __DIR__.'/../../database/migrations/create_notification_log_items_table.php';
 
         $migration->up();
 
-        Schema::create('users', function(Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
 
             $table->string('email');

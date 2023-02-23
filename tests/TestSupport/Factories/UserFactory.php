@@ -3,7 +3,6 @@
 namespace Spatie\NotificationLog\Tests\TestSupport\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Spatie\NotificationLog\Tests\TestSupport\Models\User;
 
 class UserFactory extends Factory

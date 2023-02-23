@@ -2,14 +2,12 @@
 
 namespace Spatie\NotificationLog\Actions;
 
-use Illuminate\Console\Scheduling\Event;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Events\NotificationSending;
 use Spatie\NotificationLog\Exceptions\InvalidExtraContent;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Support\Config;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\AnonymousNotifiable;
 
 class ConvertNotificationSendingEventToLogItem
 {
@@ -20,11 +18,11 @@ class ConvertNotificationSendingEventToLogItem
         return $modelClass::create([
             'notification_type' => $this->getNotificationType($event),
             'notifiable_type' => $this->getNotifiableType($event),
-            'notifiable_id'  =>  $this->getNotifiableKey($event),
+            'notifiable_id' => $this->getNotifiableKey($event),
             'channel' => $event->channel,
             'fingerprint' => $this->getFingerPrint($event),
             'extra' => $this->getExtra($event),
-            'anonymous_notifiable_properties' => $this->getAnonymousNotifiableProperties($event)
+            'anonymous_notifiable_properties' => $this->getAnonymousNotifiableProperties($event),
         ]);
     }
 
@@ -34,7 +32,7 @@ class ConvertNotificationSendingEventToLogItem
         $notifiable = $event->notifiable;
 
         return $notifiable instanceof Model
-            ?  $notifiable->getMorphClass()
+            ? $notifiable->getMorphClass()
             : null;
     }
 
@@ -44,7 +42,7 @@ class ConvertNotificationSendingEventToLogItem
         $notifiable = $event->notifiable;
 
         return $notifiable instanceof Model
-            ?  $notifiable->getKey()
+            ? $notifiable->getKey()
             : null;
     }
 
@@ -67,7 +65,6 @@ class ConvertNotificationSendingEventToLogItem
         return config('notification-log.model');
     }
 
-
     protected function getFingerprint(NotificationSending $event): ?string
     {
         $notification = $event->notification;
@@ -79,12 +76,11 @@ class ConvertNotificationSendingEventToLogItem
         return null;
     }
 
-
     protected function getExtra(NotificationSending $event): array
     {
         $notification = $event->notification;
 
-        if (method_exists($notification, 'logExtra', )) {
+        if (method_exists($notification, 'logExtra')) {
             $extra = $notification->logExtra($event);
 
             if (! is_array($extra)) {

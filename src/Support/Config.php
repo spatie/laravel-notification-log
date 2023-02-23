@@ -4,8 +4,8 @@ namespace Spatie\NotificationLog\Support;
 
 use Spatie\NotificationLog\Actions\ConvertNotificationSendingEventToLogItem;
 use Spatie\NotificationLog\Exceptions\InvalidActionClass;
-use Spatie\NotificationLog\NotificationEventSubscriber;
 use Spatie\NotificationLog\Models\NotificationLogItem;
+use Spatie\NotificationLog\NotificationEventSubscriber;
 
 class Config
 {

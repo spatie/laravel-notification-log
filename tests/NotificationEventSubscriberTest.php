@@ -15,8 +15,8 @@ use Spatie\NotificationLog\Tests\TestSupport\Notifications\MultipleChannelsNotif
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\ShouldNotLogNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\TestNotification;
 
-beforeEach(function() {
-   $this->user = User::factory()->create();
+beforeEach(function () {
+    $this->user = User::factory()->create();
 });
 
 it('will log a sent notification', function () {
@@ -34,13 +34,13 @@ it('will log a sent notification', function () {
         ->sent_at->not()->toBeNull();
 });
 
-it('will not log a notification that should not be logged', function() {
+it('will not log a notification that should not be logged', function () {
     $this->user->notify(new ShouldNotLogNotification());
 
     expect(NotificationLogItem::get())->toHaveCount(0);
 });
 
-it('can log a notification that is being sent to multiple channels', function() {
+it('can log a notification that is being sent to multiple channels', function () {
     $this->user->notify(new MultipleChannelsNotification());
 
     expect(NotificationLogItem::get())->toHaveCount(2);
@@ -51,15 +51,15 @@ it('can log a notification that is being sent to multiple channels', function() 
     expect($logItems[1]->channel)->toBe(DummyChannel::class);
 });
 
-it('can log a all notifications sent to a collection of notifiables', function() {
-   $users = User::factory()->count(5)->create();
+it('can log a all notifications sent to a collection of notifiables', function () {
+    $users = User::factory()->count(5)->create();
 
-   Notification::send($users, new TestNotification());
+    Notification::send($users, new TestNotification());
 
-   expect(NotificationLogItem::get())->toHaveCount(5);
+    expect(NotificationLogItem::get())->toHaveCount(5);
 });
 
-it('can log extra information', function() {
+it('can log extra information', function () {
     Notification::send($this->user, new LogExtraNotification());
 
     $logItem = NotificationLogItem::first();
@@ -67,11 +67,11 @@ it('can log extra information', function() {
     expect($logItem->extra)->toBe(['extraKey' => 'extraValue']);
 });
 
-it('will throw an exception if the extra method returns something invalid', function() {
+it('will throw an exception if the extra method returns something invalid', function () {
     Notification::send($this->user, new InvalidLogExtraNotification());
 })->throws(InvalidExtraContent::class);
 
-it('can handle an on-demand notification', function() {
+it('can handle an on-demand notification', function () {
     Notification::route('mail', 'john@example.com')->notify(new TestNotification());
 
     $logItem = NotificationLogItem::first();
@@ -81,7 +81,7 @@ it('can handle an on-demand notification', function() {
     ]);
 });
 
-it('can handle a notification with a fingerprint', function() {
+it('can handle a notification with a fingerprint', function () {
     $this->user->notify(new FingerprintNotification());
 
     $logItem = NotificationLogItem::first();
@@ -89,12 +89,10 @@ it('can handle a notification with a fingerprint', function() {
     expect($logItem->fingerprint)->toBe('this-is-a-fingerprint');
 });
 
-it('will log an unsent notification when there was a problem sending it', function() {
+it('will log an unsent notification when there was a problem sending it', function () {
     try {
         $this->user->notify(new ChannelWillThrowExceptionNotification());
-
     } catch (DummyChannelException) {
-
     }
 
     $logItem = NotificationLogItem::first();
@@ -102,11 +100,10 @@ it('will log an unsent notification when there was a problem sending it', functi
     expect($logItem->sent_at)->toBeNull();
 });
 
-it('can log a custom notification type', function() {
+it('can log a custom notification type', function () {
     $this->user->notify(new CustomTypeNotification());
 
     $logItem = NotificationLogItem::first();
 
     expect($logItem->notification_type)->toBe('customType');
-
 });

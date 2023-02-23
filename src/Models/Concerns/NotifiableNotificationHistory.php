@@ -3,9 +3,9 @@
 namespace Spatie\NotificationLog\Models\Concerns;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\NotificationLog\Models\NotificationLogItem;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\NotificationLog\Support\Config;
 
 /** @mixin Model $this */
@@ -16,8 +16,7 @@ trait NotifiableNotificationHistory
         string|array $notificationTypes = null,
         Carbon $before = null,
         Carbon $after = null,
-    ): ?NotificationLogItem
-    {
+    ): ?NotificationLogItem {
         $notificationLogClass = Config::notificationLogModelClass();
 
         return $notificationLogClass::latestFor(
