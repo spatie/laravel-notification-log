@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('channel');
             $table->string('fingerprint')->nullable();
             $table->json('extra')->nullable();
-            $table->text('exception_message')->nullable();
             $table->json('anonymous_notifiable_properties')->nullable();
+            $table->text('exception_message')->nullable();
             $table->dateTime('sent_at')->nullable();
             $table->timestamps();
         });

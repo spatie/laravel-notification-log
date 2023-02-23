@@ -1,6 +1,6 @@
 {
     "name": "spatie/laravel-notification-log",
-    "description": "Log all notifications sent by your Laravel app",
+    "description": "Log notifications sent by your Laravel app",
     "keywords": [
         "spatie",
         "laravel",
