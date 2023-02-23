@@ -12,5 +12,11 @@ return [
      * This feature uses Laravel's native pruning feature:
      * https://laravel.com/docs/10.x/eloquent#pruning-models
      */
-    'prune_after_days' => 30
+    'prune_after_days' => 30,
+
+    /*
+     * If this is set to true, any notification that does not have a
+     * `shouldLog` method will be logged.
+     */
+    'log_all_by_default' => config('notification-log.log_all_by_default'),
 ];

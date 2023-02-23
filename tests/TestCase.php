@@ -32,7 +32,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        $migration = include_once __DIR__ . '/../database/migrations/create_notification_log_items_table.php';
+        $migration = include __DIR__ . '/../database/migrations/create_notification_log_items_table.php';
 
         $migration->up();
 

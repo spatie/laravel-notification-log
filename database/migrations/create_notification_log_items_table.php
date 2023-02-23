@@ -18,6 +18,7 @@ return new class extends Migration
             $table->json('extra')->nullable();
             $table->dateTime('sent_at')->nullable();
             $table->text('exception_message')->nullable();
+            $table->string('locale')->nullable();
             $table->timestamps();
         });
     }

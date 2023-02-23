@@ -34,4 +34,13 @@ class NotificationLogItem extends Model
     {
         return $this->created_at > now()->subMinutes($minutes);
     }
+
+    public function markAsSent(): self
+    {
+        $this->update([
+            'sent_at' => now(),
+        ]);
+
+        return $this;
+    }
 }
