@@ -3,6 +3,8 @@ title: Introduction
 weight: 1
 ---
 
+**PACKAGE IN DEVELOPMENT, DO NOT USE YET**
+
 Using this package you can monitor the health of your application by registering one of [the available checks](/docs/laravel-notification-log/v1/available-checks/overview).
 
 Here's an example where we'll monitor used disk space.
