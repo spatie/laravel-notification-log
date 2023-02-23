@@ -22,6 +22,7 @@ class ConvertNotificationSendingEventToLogItem
             'notifiable_type' => $this->getNotifiableType($event),
             'notifiable_id'  =>  $this->getNotifiableKey($event),
             'channel' => $event->channel,
+            'fingerprint' => $this->getFingerPrint($event),
             'extra' => $this->getExtra($event),
             'anonymous_notifiable_properties' => $this->getAnonymousNotifiableProperties($event)
         ]);
@@ -60,9 +61,19 @@ class ConvertNotificationSendingEventToLogItem
         return config('notification-log.model');
     }
 
-    /**
-     * @return class-string<NotificationLogItem>
-     */
+
+    protected function getFingerprint(NotificationSending $event): ?string
+    {
+        $notification = $event->notification;
+
+        if (method_exists($notification, 'fingerprint')) {
+            return $notification->fingerprint($event);
+        }
+
+        return null;
+    }
+
+
     protected function getExtra(NotificationSending $event): array
     {
         $notification = $event->notification;

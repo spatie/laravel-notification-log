@@ -5,6 +5,7 @@ use Spatie\NotificationLog\Exceptions\InvalidExtraContent;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Tests\TestSupport\Channels\DummyChannel\DummyChannel;
 use Spatie\NotificationLog\Tests\TestSupport\Models\User;
+use Spatie\NotificationLog\Tests\TestSupport\Notifications\FingerprintNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\InvalidLogExtraNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\LogExtraNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\MultipleChannelsNotification;
@@ -75,4 +76,12 @@ it('can handle an on-demand notification', function() {
     expect($logItem->anonymous_notifiable_properties)->toBe([
         'mail' => 'john@example.com',
     ]);
+});
+
+it('can handle a notification with a fingerprint', function() {
+    $this->user->notify(new FingerprintNotification());
+
+    $logItem = NotificationLogItem::first();
+
+    expect($logItem->fingerprint)->toBe('this-is-a-fingerprint');
 });
