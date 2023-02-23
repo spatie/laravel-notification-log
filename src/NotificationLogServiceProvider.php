@@ -5,7 +5,7 @@ namespace Spatie\NotificationLog;
 use Illuminate\Support\Facades\Event;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Spatie\NotificationLog\Commands\NotificationLogCommand;
+use Spatie\NotificationLog\Support\Config;
 
 class NotificationLogServiceProvider extends PackageServiceProvider
 {
@@ -17,8 +17,10 @@ class NotificationLogServiceProvider extends PackageServiceProvider
             ->hasMigration('create_notification_log_items_table');
     }
 
-    public function registeringPackage()
+    public function bootingPackage(): void
     {
-        Event::subscribe(NotificationEventSubscriber::class);
+        $eventSubscriberClass = Config::eventSubscriberClass();
+
+        Event::subscribe($eventSubscriberClass);
     }
 }

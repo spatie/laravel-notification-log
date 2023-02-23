@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Notification;
+use Spatie\NotificationLog\Exceptions\InvalidExtraContent;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Tests\TestSupport\Channels\DummyChannel\DummyChannel;
 use Spatie\NotificationLog\Tests\TestSupport\Models\User;
+use Spatie\NotificationLog\Tests\TestSupport\Notifications\InvalidLogExtraNotification;
+use Spatie\NotificationLog\Tests\TestSupport\Notifications\LogExtraNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\MultipleChannelsNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\ShouldNotLogNotification;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\TestNotification;
@@ -42,3 +46,23 @@ it('can log a notification that is being sent to multiple channels', function() 
     expect($logItems[0]->channel)->toBe('mail');
     expect($logItems[1]->channel)->toBe(DummyChannel::class);
 });
+
+it('can log a all notifications sent to a collection of notifiables', function() {
+   $users = User::factory()->count(5)->create();
+
+   Notification::send($users, new TestNotification());
+
+   expect(NotificationLogItem::get())->toHaveCount(5);
+});
+
+it('can log extra information', function() {
+    Notification::send($this->user, new LogExtraNotification());
+
+    $logItem = NotificationLogItem::first();
+
+    expect($logItem->extra)->toBe(['extraKey' => 'extraValue']);
+});
+
+it('will throw an exception if the extra method returns something invalid', function() {
+    Notification::send($this->user, new InvalidLogExtraNotification());
+})->throws(InvalidExtraContent::class);

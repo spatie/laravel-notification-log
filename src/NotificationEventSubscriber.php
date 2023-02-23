@@ -5,6 +5,7 @@ namespace Spatie\NotificationLog;
 use Illuminate\Notifications\Events\NotificationSending;
 use Illuminate\Notifications\Events\NotificationSent;
 use Spatie\NotificationLog\Models\NotificationLogItem;
+use Spatie\NotificationLog\Support\Config;
 use WeakMap;
 
 class NotificationEventSubscriber
@@ -24,16 +25,13 @@ class NotificationEventSubscriber
             return;
         }
 
-        /** @var \Illuminate\Notifications\Notifiable $notifiable */
-        $notifiable = $event->notifiable;
+        $convertEventToModelAction = Config::convertEventToModelAction();
 
-        $logItem = NotificationLogItem::create([
-            'notification_type' => get_class($event->notification),
-            'notifiable_type' => $notifiable->getMorphClass(),
-            'notifiable_id'  => $notifiable->id,
-            'channel' => $event->channel,
-            'extra' => [],
-        ]);
+        $logItem = $convertEventToModelAction->execute($event);
+
+        if ($logItem) {
+            self::$sentNotifications[$event->notification] = $logItem;
+        }
 
         self::$sentNotifications[$event->notification] = $logItem;
     }
