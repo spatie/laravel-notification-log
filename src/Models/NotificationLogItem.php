@@ -11,6 +11,13 @@ class NotificationLogItem extends Model
 {
     use MassPrunable;
 
+    protected $guarded = [];
+
+    protected $casts = [
+        'extra' => 'array',
+        'send_at' => 'datetime',
+    ];
+
     public function prunable(): Builder
     {
         $threshold = config('notification-log.prune_after_days');

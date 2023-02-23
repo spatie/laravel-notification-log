@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('notification_log_items', function (Blueprint $table) {
             $table->id();
             $table->string('notification_type');
-            $table->string('notifiable_type');
             $table->unsignedBigInteger('notifiable_id');
+            $table->string('notifiable_type');
             $table->string('channel');
             $table->string('fingerprint')->nullable();
             $table->json('extra')->nullable();
