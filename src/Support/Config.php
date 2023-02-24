@@ -2,7 +2,7 @@
 
 namespace Spatie\NotificationLog\Support;
 
-use Spatie\NotificationLog\Actions\ConvertNotificationSendingEventToLogItem;
+use Spatie\NotificationLog\Actions\ConvertNotificationSendingEventToLogItemAction;
 use Spatie\NotificationLog\Exceptions\InvalidActionClass;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\NotificationEventSubscriber;
@@ -17,12 +17,12 @@ class Config
         return config('notification-log.model');
     }
 
-    public static function convertEventToModelAction(): ConvertNotificationSendingEventToLogItem
+    public static function convertEventToModelAction(): ConvertNotificationSendingEventToLogItemAction
     {
         $actionClass = config('notification-log.actions.convertEventToModel');
 
-        if (! is_a($actionClass, ConvertNotificationSendingEventToLogItem::class, true)) {
-            throw InvalidActionClass::make('convertEventToModel', ConvertNotificationSendingEventToLogItem::class);
+        if (! is_a($actionClass, ConvertNotificationSendingEventToLogItemAction::class, true)) {
+            throw InvalidActionClass::make('convertEventToModel', ConvertNotificationSendingEventToLogItemAction::class);
         }
 
         return app($actionClass);

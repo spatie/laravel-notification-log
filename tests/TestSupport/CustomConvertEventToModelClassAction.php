@@ -3,9 +3,9 @@
 namespace Spatie\NotificationLog\Tests\TestSupport;
 
 use Illuminate\Notifications\Events\NotificationSending;
-use Spatie\NotificationLog\Actions\ConvertNotificationSendingEventToLogItem;
+use Spatie\NotificationLog\Actions\ConvertNotificationSendingEventToLogItemAction;
 
-class CustomConvertEventToModelClass extends ConvertNotificationSendingEventToLogItem
+class CustomConvertEventToModelClassAction extends ConvertNotificationSendingEventToLogItemAction
 {
     protected function getExtra(NotificationSending $event): array
     {

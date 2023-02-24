@@ -3,7 +3,7 @@
 use Spatie\NotificationLog\Exceptions\InvalidActionClass;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Support\Config;
-use Spatie\NotificationLog\Tests\TestSupport\CustomConvertEventToModelClass;
+use Spatie\NotificationLog\Tests\TestSupport\CustomConvertEventToModelClassAction;
 use Spatie\NotificationLog\Tests\TestSupport\Models\User;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\TestNotification;
 
@@ -18,7 +18,7 @@ it('will throw an exception when specifying an invalid action class', function (
 })->throws(InvalidActionClass::class);
 
 it('can use another event model class', function () {
-    config()->set('notification-log.actions.convertEventToModel', CustomConvertEventToModelClass::class);
+    config()->set('notification-log.actions.convertEventToModel', CustomConvertEventToModelClassAction::class);
 
     $this->user->notify(new TestNotification());
 

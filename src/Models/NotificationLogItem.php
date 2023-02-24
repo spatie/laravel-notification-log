@@ -52,7 +52,7 @@ class NotificationLogItem extends Model
     public static function latestFor(
         $notifiable,
         string $fingerprint = null,
-        string|array $notificationTypes = null,
+        string|array $notificationType = null,
         Carbon $before = null,
         Carbon $after = null,
     ): ?NotificationLogItem {
@@ -60,8 +60,8 @@ class NotificationLogItem extends Model
             ->where('notifiable_type', $notifiable->getMorphClass())
             ->where('notifiable_id', $notifiable->getKey())
             ->when($fingerprint, fn (Builder $query) => $query->where('fingerprint', $fingerprint))
-            ->when($notificationTypes, function (Builder $query) use ($notificationTypes) {
-                $query->whereIn('notification_type', Arr::wrap($notificationTypes));
+            ->when($notificationType, function (Builder $query) use ($notificationType) {
+                $query->whereIn('notification_type', Arr::wrap($notificationType));
             })
             ->when($before, function (Builder $query) use ($before) {
                 $query->where('created_at', '<=', $before->toDateTimeString());

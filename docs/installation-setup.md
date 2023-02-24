@@ -53,7 +53,7 @@ return [
      *
      */
     'actions' => [
-        'convertEventToModel' => Spatie\NotificationLog\Actions\ConvertNotificationSendingEventToLogItem::class
+        'convertEventToModel' => Spatie\NotificationLog\Actions\ConvertNotificationSendingEventToLogItemAction::class
     ],
 
     /*

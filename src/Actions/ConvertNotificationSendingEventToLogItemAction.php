@@ -9,7 +9,7 @@ use Spatie\NotificationLog\Exceptions\InvalidExtraContent;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Support\Config;
 
-class ConvertNotificationSendingEventToLogItem
+class ConvertNotificationSendingEventToLogItemAction
 {
     public function execute(NotificationSending $event): ?NotificationLogItem
     {

@@ -27,6 +27,8 @@ trait NotifiableNotificationHistory
 
     public function notificationLogItems(): MorphMany
     {
-        return $this->morphMany(NotificationLogItem::class, 'notifiable');
+        return $this->morphMany(NotificationLogItem::class, 'notifiable')
+            ->orderByDesc('created_at')
+            ->orderByDesc($this->getKeyName());
     }
 }
