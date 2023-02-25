@@ -56,6 +56,18 @@ class NotificationLogItem extends Model
         Carbon $before = null,
         Carbon $after = null,
     ): ?NotificationLogItem {
+        return self::latestForQuery(...func_get_args())->first();
+
+    }
+
+    public static function latestForQuery(
+        $notifiable,
+        string $fingerprint = null,
+        string|array $notificationType = null,
+        Carbon $before = null,
+        Carbon $after = null,
+    ): Builder
+    {
         return self::query()
             ->where('notifiable_type', $notifiable->getMorphClass())
             ->where('notifiable_id', $notifiable->getKey())
@@ -70,7 +82,6 @@ class NotificationLogItem extends Model
                 $query->where('created_at', '>', $after->toDateTimeString());
             })
             ->orderByDesc('created_at')
-            ->orderByDesc('id')
-            ->first();
+            ->orderByDesc('id');
     }
 }

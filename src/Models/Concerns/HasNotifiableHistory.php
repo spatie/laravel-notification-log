@@ -5,6 +5,7 @@ namespace Spatie\NotificationLog\Models\Concerns;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Support\Config;
 
@@ -17,11 +18,21 @@ trait HasNotifiableHistory
         Carbon $before = null,
         Carbon $after = null,
     ): ?NotificationLogItem {
+        return $this->latestLoggedNotificationQuery(...func_get_args())->first();
+    }
+
+    public function latestLoggedNotificationQuery(
+        string $fingerprint = null,
+        string|array $notificationTypes = null,
+        Carbon $before = null,
+        Carbon $after = null,
+    ): Builder
+    {
         $notificationLogClass = Config::notificationLogModelClass();
 
-        return $notificationLogClass::latestFor(
+        return $notificationLogClass::latestForQuery(
             $this,
-            ...func_get_args()
+            ...func_get_args(),
         );
     }
 
