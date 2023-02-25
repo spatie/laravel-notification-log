@@ -57,7 +57,6 @@ class NotificationLogItem extends Model
         Carbon $after = null,
     ): ?NotificationLogItem {
         return self::latestForQuery(...func_get_args())->first();
-
     }
 
     public static function latestForQuery(
@@ -66,8 +65,7 @@ class NotificationLogItem extends Model
         string|array $notificationType = null,
         Carbon $before = null,
         Carbon $after = null,
-    ): Builder
-    {
+    ): Builder {
         return self::query()
             ->where('notifiable_type', $notifiable->getMorphClass())
             ->where('notifiable_id', $notifiable->getKey())

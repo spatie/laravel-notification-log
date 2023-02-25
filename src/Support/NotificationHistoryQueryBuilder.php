@@ -12,8 +12,7 @@ class NotificationHistoryQueryBuilder
     public function __construct(
         protected Model $notifiable,
         protected bool $shouldExist,
-    )
-    {
+    ) {
         $this->query = $this->notifiable->latestLoggedNotificationQuery();
     }
 
@@ -26,8 +25,6 @@ class NotificationHistoryQueryBuilder
             ? $query->exists()
             : $query->doesntExist();
     }
-
-
 
     public function query(): Builder
     {
