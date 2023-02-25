@@ -22,7 +22,6 @@ trait HasHistory
         $this->ensureNotifiableIsModel($notifiable);
 
         return new NotificationHistoryQueryBuilder($this, $notifiable, shouldExist: false);
-
     }
 
     protected function ensureNotifiableIsModel($notifiable): void
@@ -31,8 +30,7 @@ trait HasHistory
             throw InvalidNotifiable::shouldBeAModel();
         }
 
-        if (! in_array(HasNotifiableHistory::class, class_uses_recursive($notifiable)))
-        {
+        if (! in_array(HasNotifiableHistory::class, class_uses_recursive($notifiable))) {
             throw InvalidNotifiable::shouldUseTrait($notifiable);
         }
     }
