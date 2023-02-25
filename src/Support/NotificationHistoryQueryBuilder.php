@@ -27,8 +27,6 @@ class NotificationHistoryQueryBuilder
 
     public function inThePastMinutes(int $numberOfMinutes)
     {
-        ray()->showQueries();
-
         $query = $this->query
             ->where('created_at', '>=', now()->subMinutes($numberOfMinutes));
 
