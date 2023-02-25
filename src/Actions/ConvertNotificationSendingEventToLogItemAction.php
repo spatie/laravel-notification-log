@@ -5,6 +5,7 @@ namespace Spatie\NotificationLog\Actions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Events\NotificationSending;
+use Illuminate\Notifications\Notification;
 use Spatie\NotificationLog\Exceptions\InvalidExtraContent;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Support\Config;
@@ -50,8 +51,13 @@ class ConvertNotificationSendingEventToLogItemAction
     {
         $notification = $event->notification;
 
+        return $this->getNotificationTypeForNotification($notification, $event->notifiable);
+    }
+
+    public function getNotificationTypeForNotification(Notification $notification, $notifiable)
+    {
         if (method_exists($notification, 'logType')) {
-            return $notification->logType($event);
+            return $notification->logType($notifiable);
         }
 
         return get_class($notification);

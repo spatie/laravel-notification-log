@@ -13,14 +13,14 @@ trait HasHistory
 
         $notifiable->latestLoggedNotification();
 
-        return new NotificationHistoryQueryBuilder($notifiable, shouldExist: true);
+        return new NotificationHistoryQueryBuilder($this, $notifiable, shouldExist: true);
     }
 
     public function wasNotSentTo($notifiable): NotificationHistoryQueryBuilder
     {
         $this->ensureNotifiableIsModel($notifiable);
 
-        return new NotificationHistoryQueryBuilder($notifiable, shouldExist: false);
+        return new NotificationHistoryQueryBuilder($this, $notifiable, shouldExist: false);
 
     }
 
