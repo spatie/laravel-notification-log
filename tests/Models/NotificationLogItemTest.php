@@ -1,15 +1,15 @@
 <?php
 
 use Spatie\NotificationLog\Models\NotificationLogItem;
-use \Spatie\NotificationLog\Tests\TestSupport\Models\User;
+use Spatie\NotificationLog\Tests\TestSupport\Models\User;
 
-beforeEach(function() {
+beforeEach(function () {
     $this->user = User::factory()->create();
 
     $this->anotherUser = User::factory()->create();
 });
 
-it('can find the latest notification for a notifiable', function() {
+it('can find the latest notification for a notifiable', function () {
     $firstLogItem = NotificationLogItem::factory()->forNotifiable($this->user)->create();
 
     $secondLogItem = NotificationLogItem::factory()->forNotifiable($this->user)->create();
@@ -19,16 +19,16 @@ it('can find the latest notification for a notifiable', function() {
     expect(NotificationLogItem::latestFor($this->anotherUser))->toBeModel($otherUserLogItem);
 });
 
-it('can find the latest sent notification for a type', function() {
+it('can find the latest sent notification for a type', function () {
     $firstType1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'notification_type' => 'type1',
     ]);
 
-    $secondType1 =NotificationLogItem::factory()->forNotifiable($this->user)->create([
+    $secondType1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'notification_type' => 'type1',
     ]);
 
-   $firstType2 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
+    $firstType2 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'notification_type' => 'type2',
     ]);
 

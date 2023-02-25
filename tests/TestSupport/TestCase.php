@@ -18,7 +18,7 @@ class TestCase extends Orchestra
 
         Factory::guessFactoryNamesUsing(
             function (string $modelName) {
-                return 'Spatie\\NotificationLog\\Tests\\TestSupport\\Factories\\' . class_basename($modelName) . 'Factory';
+                return 'Spatie\\NotificationLog\\Tests\\TestSupport\\Factories\\'.class_basename($modelName).'Factory';
             }
         );
     }
