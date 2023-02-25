@@ -36,6 +36,44 @@ it('can determine if it was sent in the past hour', function (
     [61, false],
 ]);
 
+it('will return false when using it for an other notifiable', function() {
+    $otherNotifiable = User::factory()->create();
+
+    NotificationLogItem::factory()
+        ->forNotifiable($otherNotifiable)
+        ->create([
+            'notification_type' => HasHistoryNotification::class,
+            'created_at' => now()->subMinutes(30),
+        ]);
+
+    $hasHistoryCalls = function ($notifiable) {
+        return $this
+            ->wasSentTo($notifiable)
+            ->inThePastMinutes(60);
+    };
+
+    expect(executeInNotification($hasHistoryCalls, $this->notifiable))
+        ->toBeFalse();
+});
+
+it('will return false when using it for an other notification type', function() {
+    NotificationLogItem::factory()
+        ->forNotifiable($this->notifiable)
+        ->create([
+            'notification_type' => 'other-type',
+            'created_at' => now()->subMinutes(30),
+        ]);
+
+    $hasHistoryCalls = function ($notifiable) {
+        return $this
+            ->wasSentTo($notifiable)
+            ->inThePastMinutes(60);
+    };
+
+    expect(executeInNotification($hasHistoryCalls, $this->notifiable))
+        ->toBeFalse();
+});
+
 function executeInNotification(Closure $closure, User $notifiable): bool
 {
     $closure = Closure::bind($closure, new HasHistoryNotification());
