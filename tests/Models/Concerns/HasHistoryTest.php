@@ -5,13 +5,13 @@ use Spatie\NotificationLog\Tests\TestSupport\Models\User;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\HasHistoryNotification;
 use Spatie\TestTime\TestTime;
 
-beforeEach(function() {
+beforeEach(function () {
     TestTime::freeze();
 
-   $this->notifiable = User::factory()->create();
+    $this->notifiable = User::factory()->create();
 });
 
-it('can determine if it was sent in the past hour', function(
+it('can determine if it was sent in the past hour', function (
     int $createdMinutesAgo,
     bool $expectedResult,
 ) {
@@ -19,17 +19,17 @@ it('can determine if it was sent in the past hour', function(
         ->forNotifiable($this->notifiable)
         ->create([
             'notification_type' => HasHistoryNotification::class,
-            'created_at' => now()->subMinutes($createdMinutesAgo)
+            'created_at' => now()->subMinutes($createdMinutesAgo),
         ]);
 
-    $hasHistoryCalls = function($notifiable) {
+    $hasHistoryCalls = function ($notifiable) {
         return $this
             ->wasSentTo($notifiable)
             ->inThePastMinutes(60);
     };
 
-     expect(executeInNotification($hasHistoryCalls, $this->notifiable))
-         ->toBe($expectedResult);
+    expect(executeInNotification($hasHistoryCalls, $this->notifiable))
+        ->toBe($expectedResult);
 })->with([
     [59, true],
     [60, true],
