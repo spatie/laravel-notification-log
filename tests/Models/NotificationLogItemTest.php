@@ -1,15 +1,15 @@
 <?php
 
 use Spatie\NotificationLog\Models\NotificationLogItem;
-use \Spatie\NotificationLog\Tests\TestSupport\Models\User;
+use Spatie\NotificationLog\Tests\TestSupport\Models\User;
 
-beforeEach(function() {
+beforeEach(function () {
     $this->user = User::factory()->create();
 
     $this->anotherUser = User::factory()->create();
 });
 
-it('can find the latest notification for a notifiable', function() {
+it('can find the latest notification for a notifiable', function () {
     expect(NotificationLogItem::latestFor($this->user))->toBeNull();
 
     $firstLogItem = NotificationLogItem::factory()->forNotifiable($this->user)->create();
@@ -21,7 +21,7 @@ it('can find the latest notification for a notifiable', function() {
     expect(NotificationLogItem::latestFor($this->anotherUser))->toBeModel($otherUserLogItem);
 });
 
-it('can find the latest sent notification for a type', function() {
+it('can find the latest sent notification for a type', function () {
     $firstType1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'notification_type' => 'type1',
     ]);
@@ -48,12 +48,12 @@ it('can find the latest sent notification for a type', function() {
         ->toBeNull();
 });
 
-it('can find the latest sent notification for fingerprint', function() {
+it('can find the latest sent notification for fingerprint', function () {
     $firstFingerprint1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'fingerprint' => 'fingerprint-1',
     ]);
 
-    $secondFingerprint1 =NotificationLogItem::factory()->forNotifiable($this->user)->create([
+    $secondFingerprint1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'fingerprint' => 'fingerprint-1',
     ]);
 
