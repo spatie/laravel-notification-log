@@ -64,11 +64,12 @@ class NotificationLogItem extends Model
                 $query->whereIn('notification_type', Arr::wrap($notificationType));
             })
             ->when($before, function (Builder $query) use ($before) {
-                $query->where('created_at', '<=', $before->toDateTimeString());
+                $query->where('created_at', '<', $before->toDateTimeString());
             })
             ->when($after, function (Builder $query) use ($after) {
-                $query->where('created_at', '>=', $after->toDateTimeString());
+                $query->where('created_at', '>', $after->toDateTimeString());
             })
+            ->orderByDesc('created_at')
             ->orderByDesc('id')
             ->first();
     }

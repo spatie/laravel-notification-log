@@ -1,15 +1,17 @@
 <?php
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Spatie\NotificationLog\Models\NotificationLogItem;
 use \Spatie\NotificationLog\Tests\TestSupport\Models\User;
 
-beforeEach(function() {
+beforeEach(function () {
     $this->user = User::factory()->create();
 
     $this->anotherUser = User::factory()->create();
 });
 
-it('can find the latest notification for a notifiable', function() {
+it('can find the latest notification for a notifiable', function () {
     expect(NotificationLogItem::latestFor($this->user))->toBeNull();
 
     $firstLogItem = NotificationLogItem::factory()->forNotifiable($this->user)->create();
@@ -21,7 +23,7 @@ it('can find the latest notification for a notifiable', function() {
     expect(NotificationLogItem::latestFor($this->anotherUser))->toBeModel($otherUserLogItem);
 });
 
-it('can find the latest sent notification for a type', function() {
+it('can find the latest sent notification for a type', function () {
     $firstType1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'notification_type' => 'type1',
     ]);
@@ -48,12 +50,12 @@ it('can find the latest sent notification for a type', function() {
         ->toBeNull();
 });
 
-it('can find the latest sent notification for fingerprint', function() {
+it('can find the latest sent notification for fingerprint', function () {
     $firstFingerprint1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'fingerprint' => 'fingerprint-1',
     ]);
 
-    $secondFingerprint1 =NotificationLogItem::factory()->forNotifiable($this->user)->create([
+    $secondFingerprint1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'fingerprint' => 'fingerprint-1',
     ]);
 
@@ -74,3 +76,43 @@ it('can find the latest sent notification for fingerprint', function() {
     expect(NotificationLogItem::latestFor($this->user, fingerprint: 'fingerprint-3'))
         ->toBeNull();
 });
+
+it('can find the latest notification in a certain period', function () {
+    NotificationLogItem::factory()
+        ->forNotifiable($this->user)
+        ->state(new Sequence(
+            ['created_at' => '2023-01-01 00:00:00'],
+            ['created_at' => '2023-01-02 00:00:00'],
+            ['created_at' => '2023-01-03 00:00:00'],
+            ['created_at' => '2023-01-04 00:00:00'],
+            ['created_at' => '2023-01-05 00:00:00'],
+            ['created_at' => '2023-01-06 00:00:00'],
+            ['created_at' => '2023-01-07 00:00:00'],
+        ))
+        ->count(7)
+        ->create();
+
+    expect(NotificationLogItem::latestFor(
+        $this->user,
+        before: createCarbon('2023-01-04'))
+    )
+        ->toHaveCreationDate('2023-01-03');
+
+    expect(NotificationLogItem::latestFor(
+        $this->user,
+        after: createCarbon('2023-01-04'))
+    )
+        ->toHaveCreationDate('2023-01-07');
+
+    expect(NotificationLogItem::latestFor(
+        $this->user,
+        before: createCarbon('2023-01-06'),
+        after: createCarbon('2023-01-03'))
+    )
+        ->toHaveCreationDate('2023-01-05');
+});
+
+function createCarbon($date): Carbon
+{
+    return Carbon::createFromFormat('Y-m-d', $date)->startOfDay();
+}

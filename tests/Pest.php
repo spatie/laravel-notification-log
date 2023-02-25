@@ -29,6 +29,12 @@ expect()->extend('toBeModel', function (object|null $model) {
     return true;
 });
 
+expect()->extend('toHaveCreationDate', function(string $date) {
+    expect($this->value)->not()->toBeNull();
+
+    expect($this->value->created_at->format('Y-m-d'))->toBe($date);
+});
+
 /**
  * sent_at naamgeving verbeteren
  * exceptions opvangen uitzoeken
