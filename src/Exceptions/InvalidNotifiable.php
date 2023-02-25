@@ -10,7 +10,7 @@ class InvalidNotifiable extends Exception
 {
     public static function shouldBeAModel(): self
     {
-        return new static("The notifiable should be a model.");
+        return new static('The notifiable should be a model.');
     }
 
     public static function shouldUseTrait(Model $model): self
