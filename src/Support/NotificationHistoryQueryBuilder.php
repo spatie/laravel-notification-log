@@ -25,12 +25,10 @@ class NotificationHistoryQueryBuilder
             );
     }
 
-    public function inThePastMinutes(int $numberOfMinutes)
+    public function inThePastMinutes(int $numberOfMinutes): bool
     {
         $query = $this->query
             ->where('created_at', '>=', now()->subMinutes($numberOfMinutes));
-
-
 
         return $this->shouldExist
             ? $query->exists()
