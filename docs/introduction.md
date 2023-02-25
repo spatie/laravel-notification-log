@@ -5,27 +5,37 @@ weight: 1
 
 **PACKAGE IN DEVELOPMENT, DO NOT USE YET**
 
-Using this package you can monitor the health of your application by registering one of [the available checks](/docs/laravel-notification-log/v1/available-checks/overview).
+This package will log all the notifications sent by your app. This will allow you to write logic based on the notifications your app has sent.
 
-Here's an example where we'll monitor used disk space.
+If you want to create a list of all notifications sent to a user
 
 ```php
-// typically, in a service provider
-
-use Spatie\Health\Facades\Health;
-use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
-
-Health::checks([
-    UsedDiskSpaceCheck::new()
-        ->warnWhenUsedSpaceIsAbovePercentage(70)
-        ->failWhenUsedSpaceIsAbovePercentage(90),
-]);
+// returns a collection of `NotificationLogItem` models
+$sentNotifications = $user->loggedNotifications();
 ```
 
-When the used disk space is over 70%, then a notification with a warning will be sent. If it's above 90%, you'll get an error notification. Out of the box, the package can notify you via mail and Slack.
+In a view you could write this:
 
-You'll find a [list of available checks](/docs/laravel-notification-log/v1/available-checks/overview) here. Need a custom check? No problem, you [can create your own check](/docs/laravel-notification-log/v1/basic-usage/creating-custom-checks) in no time.
+```blade
+<ul>
+@foreach($sentNotifications as $sentNotification)
+    <li>{{ $sentNotification->type }} at {{ $sentNotification->sent_at->form('Y-m-d H:i:s') }}</li>
+@endforeach
+</ul>
+```
 
-The package can also display [a beautiful overview](/docs/laravel-notification-log/v1/viewing-results/on-a-webpage) of all health check results.
+The package also contains handy methods that allow you to make decisions based on the notifications sent. Here's an example, where we use the `wasAlreadySentTo` method provided by the package in a `shouldSent` method of a notification.
 
-![image](/docs/laravel-notification-log/v1/images/list-web-dark.png)
+```php
+// in a notification
+
+public function shouldSend($notifiable)
+{
+      return ! $this
+        ->wasAlreadySentTo($notifiable)
+        ->inThePastMinutes(60);
+}
+```
+
+You can fully customize which notifications get logged and how they get logged.
+
