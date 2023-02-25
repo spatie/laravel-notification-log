@@ -3,6 +3,7 @@
 namespace Spatie\NotificationLog\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\NotificationLog\Exceptions\InvalidNotifiable;
 use Spatie\NotificationLog\Support\NotificationHistoryQueryBuilder;
 
 trait HasHistory
@@ -27,20 +28,12 @@ trait HasHistory
     protected function ensureNotifiableIsModel($notifiable): void
     {
         if (! $notifiable instanceof Model) {
-            // todo: throw exception
+            throw InvalidNotifiable::shouldBeAModel();
         }
 
         if (! in_array(HasNotifiableHistory::class, class_uses_recursive($notifiable)))
         {
-            // todo: throw exception
+            throw InvalidNotifiable::shouldUseTrait($notifiable);
         }
     }
-
-    /**
-     * $this
-    ->wasAlreadySentTo($notifiable)
-    ->inThePastMinutes(60);
-     *
-     *
-     */
 }
