@@ -107,3 +107,4 @@ it('can log a custom notification type', function () {
 
     expect($logItem->notification_type)->toBe('customType');
 });
+

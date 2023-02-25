@@ -15,5 +15,58 @@ class OrderSentNotification extends Notification
     ) {}
 ```
 
-Rest coming soon...
+To log that a notification was sent for a set of constructor parameters, you can add a fingerprint. A fingerprint is a simple string that will be logged along with the sent notification.
 
+To add a signature to a notification, add a function `fingerprint` to your notification.
+
+```php 
+use Illuminate\Notifications\Notification;
+
+class OrderSentNotification extends Notification
+{
+    public function __construct(
+        public Order $order,
+    ) {}
+    
+    public function signature()
+    {
+        return "order-{$this->order->id}",
+    }
+}
+```
+
+The fingerprint will be saved in the `fingerprint` on the log item that is created when the notification is sent.
+
+```php
+// returns the fingerprint
+Spatie\NotificationLog\Models\NotificationLogItem::first()->fingerprint;
+```
+
+You can use the fingerprint to hunt down notifications using [the `latestFor` method](TODO add link).
+
+```php
+// return the latest logged notification for the first order.
+
+$logItem = NotificationLogItem::latestFor($notifiable, fingerprint: "order-1");
+```
+
+When your notification has a lot, or complex, constructor parameters, you could use a hashing function like `md5` to generate a value that is unique for those parameters.
+
+```php 
+use Illuminate\Notifications\Notification;
+
+class OrderSentNotification extends Notification
+{
+    public function __construct(
+        public string $parameter,
+        public string $anotherParameter,
+        public string $yetAnotherOne,
+
+    ) {}
+    
+    public function signature()
+    {
+        return md5("{$this-parameter}-{$this->anotherParameter}-{$yetAnotherOne}",
+    }
+}
+```
