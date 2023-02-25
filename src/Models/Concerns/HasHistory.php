@@ -8,7 +8,7 @@ use Spatie\NotificationLog\Support\NotificationHistoryQueryBuilder;
 
 trait HasHistory
 {
-    public function wasAlreadySentTo($notifiable): NotificationHistoryQueryBuilder
+    public function wasSentTo($notifiable): NotificationHistoryQueryBuilder
     {
         $this->ensureNotifiableIsModel($notifiable);
 
