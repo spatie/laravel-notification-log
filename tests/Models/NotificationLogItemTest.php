@@ -3,7 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Spatie\NotificationLog\Models\NotificationLogItem;
-use \Spatie\NotificationLog\Tests\TestSupport\Models\User;
+use Spatie\NotificationLog\Tests\TestSupport\Models\User;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
