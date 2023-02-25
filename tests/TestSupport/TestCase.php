@@ -17,7 +17,9 @@ class TestCase extends Orchestra
         config()->set('mail.driver', 'log');
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\NotificationLog\\Tests\\TestSupport\\Factories\\'.class_basename($modelName).'Factory'
+            function (string $modelName) {
+                return 'Spatie\\NotificationLog\\Tests\\TestSupport\\Factories\\' . class_basename($modelName) . 'Factory';
+            }
         );
     }
 
