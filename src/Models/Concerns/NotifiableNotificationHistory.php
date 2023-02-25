@@ -11,7 +11,7 @@ use Spatie\NotificationLog\Support\Config;
 /** @mixin Model $this */
 trait NotifiableNotificationHistory
 {
-    protected function latestLoggedNotification(
+    public function latestLoggedNotification(
         string $fingerprint = null,
         string|array $notificationTypes = null,
         Carbon $before = null,
