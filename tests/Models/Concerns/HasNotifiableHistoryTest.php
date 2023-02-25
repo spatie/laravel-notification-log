@@ -23,7 +23,7 @@ it('can get all notification log items for a notifiable', function () {
     expect($this->anotherUser->notificationLogItems)->toHaveCount(1);
 });
 
-it('can get the latest notification for a user', function() {
+it('can get the latest notification for a user', function () {
     expect($this->user->latestLoggedNotification())->toBeModel($this->secondUser1Log);
 
     expect($this->anotherUser->latestLoggedNotification())->toBeModel($this->firstUser2Log);
