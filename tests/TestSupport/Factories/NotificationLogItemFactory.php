@@ -12,7 +12,6 @@ class NotificationLogItemFactory extends Factory
 {
     public $model = NotificationLogItem::class;
 
-
     public function definition(): array
     {
         $user = User::factory()->create();
@@ -25,11 +24,9 @@ class NotificationLogItemFactory extends Factory
         ];
     }
 
-
     public function forNotifiable(Model $model): Factory
     {
         return $this->state(function (array $attributes) use ($model) {
-
             return [
                 'notification_type' => $model->getMorphClass(),
                 'notifiable_id' => $model->getKey(),
