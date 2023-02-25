@@ -9,7 +9,7 @@ use Spatie\NotificationLog\Models\NotificationLogItem;
 use Spatie\NotificationLog\Support\Config;
 
 /** @mixin Model $this */
-trait NotifiableNotificationHistory
+trait HasNotifiableHistory
 {
     public function latestLoggedNotification(
         string $fingerprint = null,

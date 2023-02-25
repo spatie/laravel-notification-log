@@ -43,7 +43,7 @@ The `notificationType` parameter can be an array, in which case `latestFor` will
 
 ### Using the notifiable to search logged notifications
 
-The package provides a trait `Spatie\NotificationLog\Models\Concerns\NotifiableNotificationHistory` that you can use on a notifiable.
+The package provides a trait `Spatie\NotificationLog\Models\Concerns\HasNotifiableHistory` that you can use on a notifiable.
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -51,7 +51,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use Notifiable;
-    use NotifiableNotificationHistory;
+    use HasNotifiableHistory;
 }
 ```
 

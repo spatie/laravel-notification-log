@@ -2,6 +2,6 @@
 
 namespace Spatie\NotificationLog\Models\Concerns;
 
-trait NotificationHistory
+trait HasHistory
 {
 }
