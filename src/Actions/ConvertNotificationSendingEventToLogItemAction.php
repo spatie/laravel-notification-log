@@ -60,7 +60,7 @@ class ConvertNotificationSendingEventToLogItemAction
     /**
      * @return class-string<NotificationLogItem>
      */
-    protected function getModelClass(NotificationSending $event): string
+    protected function getModelClass(): string
     {
         return config('notification-log.model');
     }
