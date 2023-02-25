@@ -34,7 +34,6 @@ it('can determine if it was sent in the past hour', function (
     [59, true],
     [60, true],
     [61, false],
-
 ]);
 
 function executeInNotification(Closure $closure, User $notifiable): bool
