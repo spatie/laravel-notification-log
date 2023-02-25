@@ -14,8 +14,7 @@ class NotificationHistoryQueryBuilder
         protected Notification $notification,
         protected Model $notifiable,
         protected bool $shouldExist,
-    )
-    {
+    ) {
         $action = Config::convertEventToModelAction();
 
         $type = $action->getNotificationTypeForNotification($this->notification, $this->notifiable);
@@ -35,8 +34,6 @@ class NotificationHistoryQueryBuilder
             ? $query->exists()
             : $query->doesntExist();
     }
-
-
 
     public function query(): Builder
     {

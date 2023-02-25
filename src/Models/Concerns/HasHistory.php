@@ -21,7 +21,6 @@ trait HasHistory
         $this->ensureNotifiableIsModel($notifiable);
 
         return new NotificationHistoryQueryBuilder($this, $notifiable, shouldExist: false);
-
     }
 
     protected function ensureNotifiableIsModel($notifiable): void
@@ -30,8 +29,7 @@ trait HasHistory
             // todo: throw exception
         }
 
-        if (! in_array(HasNotifiableHistory::class, class_uses_recursive($notifiable)))
-        {
+        if (! in_array(HasNotifiableHistory::class, class_uses_recursive($notifiable))) {
             // todo: throw exception
         }
     }
@@ -40,7 +38,5 @@ trait HasHistory
      * $this
     ->wasAlreadySentTo($notifiable)
     ->inThePastMinutes(60);
-     *
-     *
      */
 }
