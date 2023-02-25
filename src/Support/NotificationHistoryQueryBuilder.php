@@ -30,8 +30,6 @@ class NotificationHistoryQueryBuilder
         $query = $this->query
             ->where('created_at', '>=', now()->subMinutes($numberOfMinutes));
 
-
-
         return $this->shouldExist
             ? $query->exists()
             : $query->doesntExist();
