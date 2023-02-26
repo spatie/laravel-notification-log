@@ -14,6 +14,6 @@ the `notification_log_items` table has these columns:
 - `fingerprint`: a value that you can customize to identify the exact content of the notification
 - `extra`: an array of values you can freely add to the log
 - `anonymous_notifiable_properties`: the configuration of the notifiable when sending an [on demand notification](https://laravel.com/docs/10.x/notifications#on-demand-notifications)
-- ``: will contain the time the `NotificationSent` event was fired
+- `confirmed_at`: will contain the time the `NotificationSent` event was fired
 
   How the package fills all these properties can be fully customized.
