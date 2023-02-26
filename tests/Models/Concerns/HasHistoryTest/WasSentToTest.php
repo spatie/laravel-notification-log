@@ -74,7 +74,7 @@ it('will return false when using it for an other notification type', function ()
         ->toBeFalse();
 });
 
-it('can find a sent notification with the same fingerprint', function(
+it('can find a sent notification with the same fingerprint', function (
     ?string $fingerprint,
     bool $expectedResult,
 ) {
@@ -100,7 +100,7 @@ it('can find a sent notification with the same fingerprint', function(
     [null, false],
 ]);
 
-it('can find a sent notification while ignoring the fingerprint', function(
+it('can find a sent notification while ignoring the fingerprint', function (
     ?string $fingerprint,
 ) {
     NotificationLogItem::factory()

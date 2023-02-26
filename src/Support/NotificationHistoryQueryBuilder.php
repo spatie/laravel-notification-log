@@ -30,7 +30,7 @@ class NotificationHistoryQueryBuilder
     {
         $query = $this->query
             ->where('created_at', '>=', now()->subMinutes($numberOfMinutes))
-            ->when($this->withSameFingerprint, function(Builder $query) {
+            ->when($this->withSameFingerprint, function (Builder $query) {
                 $action = Config::convertEventToModelAction();
 
                 $fingerprint = $action->getFingerprintForNotification(
