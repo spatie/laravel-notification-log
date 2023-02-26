@@ -21,7 +21,7 @@ php artisan migrate
 Optionally, you can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-notification-log-config"
+php artisan vendor:publish --tag="notification-log-config"
 ```
 
 This is the contents of the published config file:
