@@ -34,26 +34,3 @@ expect()->extend('toHaveCreationDate', function (string $date) {
 
     expect($this->value->created_at->format('Y-m-d'))->toBe($date);
 });
-
-/**
- * sent_at naamgeving verbeteren
- * exceptions opvangen uitzoeken
- *
- * $notifiable->latestLoggedNotificationOfType([...]);
-
-$notifiable->latestLoggedNotification();
-
-$notifiable->loggedNotifications();
-
-$this
-->wasAlreadySentTo($notifiable)
-->inThePastMinutes(60);
-
-$logItem->wasSentAfter($logItem);
-
-$logitem->wasSentBefore($logItem);
-
-$logItemWasSentBefore();
-
-$logItem->
- */
