@@ -43,7 +43,7 @@ class NotificationLogItem extends Model
     public function markAsSent(): self
     {
         $this->update([
-            'sent_at' => now(),
+            'confirmed_at' => now(),
         ]);
 
         return $this;

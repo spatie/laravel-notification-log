@@ -31,7 +31,7 @@ it('will log a sent notification', function () {
         ->notifiable_id->toBe($this->user->getKey())
         ->notification_type->toBe(TestNotification::class)
         ->channel->toBe('mail')
-        ->sent_at->not()->toBeNull();
+        ->confirmed_at->not()->toBeNull();
 });
 
 it('will not log a notification that should not be logged', function () {
@@ -97,7 +97,7 @@ it('will log an unsent notification when there was a problem sending it', functi
 
     $logItem = NotificationLogItem::first();
 
-    expect($logItem->sent_at)->toBeNull();
+    expect($logItem->confirmed_at)->toBeNull();
 });
 
 it('can log a custom notification type', function () {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->json('extra')->nullable();
             $table->json('anonymous_notifiable_properties')->nullable();
             $table->text('exception_message')->nullable();
-            $table->dateTime('sent_at')->nullable();
+            $table->dateTime('confirmed_at')->nullable();
             $table->timestamps();
         });
     }

@@ -3,8 +3,6 @@ title: Introduction
 weight: 1
 ---
 
-**PACKAGE IN DEVELOPMENT, DO NOT USE YET**
-
 This package will log all the notifications sent by your app. This will allow you to write logic based on the notifications your app has sent.
 
 If you want to create a list of all notifications sent to a user
@@ -19,7 +17,7 @@ In a view you could write this:
 ```blade
 <ul>
 @foreach($sentNotifications as $sentNotification)
-    <li>{{ $sentNotification->type }} at {{ $sentNotification->sent_at->form('Y-m-d H:i:s') }}</li>
+    <li>{{ $sentNotification->type }} at {{ $sentNotification->created_at->format('Y-m-d H:i:s') }}</li>
 @endforeach
 </ul>
 ```
