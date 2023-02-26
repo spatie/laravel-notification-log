@@ -17,7 +17,7 @@ In a view you could write this:
 ```blade
 <ul>
 @foreach($sentNotifications as $sentNotification)
-    <li>{{ $sentNotification->type }} at {{ $sentNotification->created_at->format('Y-m-d H:i:s') }}</li>
+    <li>{{ $sentNotification->notification_type }} at {{ $sentNotification->created_at->format('Y-m-d H:i:s') }}</li>
 @endforeach
 </ul>
 ```
