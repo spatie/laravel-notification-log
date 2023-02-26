@@ -36,7 +36,7 @@ it('can determine if it was sent in the past hour', function (
     [61, false],
 ]);
 
-it('will return false when using it for an other notifiable', function() {
+it('will return false when using it for an other notifiable', function () {
     $otherNotifiable = User::factory()->create();
 
     NotificationLogItem::factory()
@@ -56,7 +56,7 @@ it('will return false when using it for an other notifiable', function() {
         ->toBeFalse();
 });
 
-it('will return false when using it for an other notification type', function() {
+it('will return false when using it for an other notification type', function () {
     NotificationLogItem::factory()
         ->forNotifiable($this->notifiable)
         ->create([
