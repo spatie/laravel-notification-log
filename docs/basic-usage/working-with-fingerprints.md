@@ -42,7 +42,7 @@ The fingerprint will be saved in the `fingerprint` on the log item that is creat
 Spatie\NotificationLog\Models\NotificationLogItem::first()->fingerprint;
 ```
 
-You can use the fingerprint to hunt down notifications using [the `latestFor` method](TODO add link).
+You can use the fingerprint to hunt down notifications using [the `latestFor` method](/docs/laravel-notification-log/v1/basic-usage/querying-the-notification-log).
 
 ```php
 // return the latest logged notification for the first order.

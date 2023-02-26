@@ -14,7 +14,7 @@ If you want to create a list of all notifications sent to a user
 $sentNotifications = $user->loggedNotifications();
 ```
 
-In a view you could write this:
+In a view, you could write this:
 
 ```blade
 <ul>

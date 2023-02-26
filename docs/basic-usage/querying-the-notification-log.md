@@ -94,3 +94,44 @@ $logItem = $user->latestLoggedNotification(
 ```
 
 The `notificationType` parameter can be an array, in which case `latestFor` will return a log item with notification type that was most recently sent.
+
+## Determining sent notifications within a notification
+
+The package offers a `HasHistory` trait that contains a couple of functions that allow you to determine if a similar notification was recently sent.
+
+To get started, first add the trait to your notification.
+
+```php
+namespace App\Notifications;
+
+use Illuminate\Notifications\Notificationuse Spatie\NotificationLog\Models\Concerns\HasHistory;
+
+class YourNotification extends Notification
+{
+    use HasHistory;
+}
+```
+
+Imagine that your notification should only be sent if a similar notification wasn't recently sent.
+
+```php
+public function shouldSend($notifiable)
+{
+    $this
+       ->wasNotSentTo($notifiable)
+       ->inThePastMinutes(30);
+}
+```
+
+By default, `wasNotSentTo` will not take into account [the fingerprint of a logged notification](/docs/laravel-notification-log/v1/basic-usage/working-with-fingerprints). To take it into account, set the named argument `withSameFingerprint` to true.
+
+```php
+public function shouldSend($notifiable)
+{
+    $this
+       ->wasNotSentTo($notifiable, withSameFingerprint: true)
+       ->inThePastMinutes(30);
+}
+```
+
+In addition to `wasNotSentTo`, the trait also has a method `wasSentTo`.
