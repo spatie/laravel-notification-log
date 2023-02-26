@@ -20,4 +20,9 @@ class HasHistoryNotification extends TestNotification
     {
         return (self::$historyTestCallable)($notifiable);
     }
+
+    public function fingerprint()
+    {
+        return 'my-fingerprint';
+    }
 }

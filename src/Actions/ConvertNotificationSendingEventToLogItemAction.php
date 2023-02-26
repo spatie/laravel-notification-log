@@ -75,8 +75,13 @@ class ConvertNotificationSendingEventToLogItemAction
     {
         $notification = $event->notification;
 
+        return $this->getFingerprintForNotification($notification, $event->notifiable);
+    }
+
+    public function getFingerprintForNotification(Notification $notification, $notifiable)
+    {
         if (method_exists($notification, 'fingerprint')) {
-            return $notification->fingerprint($event);
+            return $notification->fingerprint($notifiable);
         }
 
         return null;

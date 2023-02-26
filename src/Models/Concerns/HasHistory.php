@@ -8,20 +8,32 @@ use Spatie\NotificationLog\Support\NotificationHistoryQueryBuilder;
 
 trait HasHistory
 {
-    public function wasSentTo($notifiable): NotificationHistoryQueryBuilder
+    public function wasSentTo($notifiable, $withSameFingerprint = false): NotificationHistoryQueryBuilder
     {
         $this->ensureNotifiableIsModel($notifiable);
 
         $notifiable->latestLoggedNotification();
 
-        return new NotificationHistoryQueryBuilder($this, $notifiable, shouldExist: true);
+        return new NotificationHistoryQueryBuilder(
+            $this,
+            $notifiable,
+            shouldExist: true,
+            withSameFingerprint: $withSameFingerprint
+        );
     }
 
-    public function wasNotSentTo($notifiable): NotificationHistoryQueryBuilder
-    {
+    public function wasNotSentTo(
+        $notifiable,
+        $withSameFingerprint = false
+    ): NotificationHistoryQueryBuilder {
         $this->ensureNotifiableIsModel($notifiable);
 
-        return new NotificationHistoryQueryBuilder($this, $notifiable, shouldExist: false);
+        return new NotificationHistoryQueryBuilder(
+            $this,
+            $notifiable,
+            shouldExist: false,
+            withSameFingerprint: $withSameFingerprint,
+        );
     }
 
     protected function ensureNotifiableIsModel($notifiable): void
