@@ -117,7 +117,7 @@ Imagine that your notification should only be sent if a similar notification was
 ```php
 public function shouldSend($notifiable)
 {
-    $this
+    return $this
        ->wasNotSentTo($notifiable)
        ->inThePastMinutes(30);
 }
