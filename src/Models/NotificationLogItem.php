@@ -27,7 +27,7 @@ class NotificationLogItem extends Model
     {
         $threshold = config('notification-log.prune_after_days');
 
-        return static::where('created_at', '<=', now()->days($threshold));
+        return static::where('created_at', '<=', now()->subDays($threshold));
     }
 
     public function notifiable(): MorphTo
