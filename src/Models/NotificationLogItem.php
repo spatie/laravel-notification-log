@@ -20,7 +20,7 @@ class NotificationLogItem extends Model
     protected $casts = [
         'extra' => 'array',
         'anonymous_notifiable_properties' => 'array',
-        'send_at' => 'datetime',
+        'confirmed_at' => 'datetime',
     ];
 
     public function prunable(): Builder
