@@ -28,7 +28,7 @@ class OrderSentNotification extends Notification
         public Order $order,
     ) {}
     
-    public function signature()
+    public function fingerprint()
     {
         return "order-{$this->order->id}",
     }
@@ -64,7 +64,7 @@ class OrderSentNotification extends Notification
 
     ) {}
     
-    public function signature()
+    public function fingerprint()
     {
         return md5("{$this-parameter}-{$this->anotherParameter}-{$yetAnotherOne}",
     }
