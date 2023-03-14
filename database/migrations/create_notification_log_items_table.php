@@ -20,6 +20,9 @@ return new class extends Migration
             $table->text('exception_message')->nullable();
             $table->dateTime('confirmed_at')->nullable();
             $table->timestamps();
+            
+            $table->index(['notifiable_type', 'notifiable_id']);
+            $table->index(['created_at']);
         });
     }
 };
