@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.0.3 - 2023-03-14
+
+### What's Changed
+
+- correct mistake in fingerprint docs by @ceejayoz in https://github.com/spatie/laravel-notification-log/pull/8
+- add default indexes to created_at and notifiable by @ceejayoz in https://github.com/spatie/laravel-notification-log/pull/11
+
+### New Contributors
+
+- @ceejayoz made their first contribution in https://github.com/spatie/laravel-notification-log/pull/8
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.0.2...1.0.3
+
 ## 1.0.2 - 2023-02-28
 
 ### What's Changed
