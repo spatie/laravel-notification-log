@@ -104,7 +104,7 @@ To get started, first add the trait to your notification.
 ```php
 namespace App\Notifications;
 
-use Illuminate\Notifications\Notification
+use Illuminate\Notifications\Notification;
 use Spatie\NotificationLog\Models\Concerns\HasHistory;
 
 class YourNotification extends Notification
