@@ -30,7 +30,7 @@ class OrderSentNotification extends Notification
     
     public function fingerprint()
     {
-        return "order-{$this->order->id}",
+        return "order-{$this->order->id}";
     }
 }
 ```
@@ -66,7 +66,7 @@ class OrderSentNotification extends Notification
     
     public function fingerprint()
     {
-        return md5("{$this-parameter}-{$this->anotherParameter}-{$yetAnotherOne}",
+        return md5("{$this-parameter}-{$this->anotherParameter}-{$yetAnotherOne}";
     }
 }
 ```
