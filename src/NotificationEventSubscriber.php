@@ -52,7 +52,7 @@ class NotificationEventSubscriber
             return $notification->shouldLog($event);
         }
 
-        return true;
+        return config('notification-log.log_all_by_default') ?? true;
     }
 
     public function subscribe(): array
