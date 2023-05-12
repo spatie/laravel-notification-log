@@ -2,6 +2,22 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.0.4 - 2023-05-12
+
+### What's Changed
+
+- Fix docs by @ao-jhelmich in https://github.com/spatie/laravel-notification-log/pull/13
+- use semicolon instead of comma at the end of line by @mhfereydouni in https://github.com/spatie/laravel-notification-log/pull/17
+- Added Get Config Variable by @stijnvanouplines in https://github.com/spatie/laravel-notification-log/pull/18
+
+### New Contributors
+
+- @ao-jhelmich made their first contribution in https://github.com/spatie/laravel-notification-log/pull/13
+- @mhfereydouni made their first contribution in https://github.com/spatie/laravel-notification-log/pull/17
+- @stijnvanouplines made their first contribution in https://github.com/spatie/laravel-notification-log/pull/18
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.0.3...1.0.4
+
 ## 1.0.3 - 2023-03-14
 
 ### What's Changed
