@@ -125,6 +125,33 @@ it('can find a sent notification while ignoring the fingerprint', function (
     [null],
 ]);
 
+
+it('can find a sent notification with the same channel', function (
+    ?string $channel,
+    bool $expectedResult,
+) {
+    NotificationLogItem::factory()
+        ->forNotifiable($this->notifiable)
+        ->create([
+            'channel' => $channel,
+            'notification_type' => HasHistoryNotification::class,
+            'created_at' => now()->subMinutes(30),
+        ]);
+
+    $hasHistoryCalls = function ($notifiable, $channel) {
+        return $this
+            ->wasSentTo($notifiable)
+            ->onChannel($channel)
+            ->inThePastMinutes(60);
+    };
+
+    expect(executeInNotification($hasHistoryCalls, $this->notifiable))
+        ->toBe($expectedResult);
+})->with([
+    ['mail', true],
+    ['other-channel', false],
+]);
+
 function executeInNotification(Closure $closure, User $notifiable): bool
 {
     $closure = Closure::bind($closure, new HasHistoryNotification());

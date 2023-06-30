@@ -17,6 +17,7 @@ trait HasNotifiableHistory
         string|array $notificationTypes = null,
         Carbon $before = null,
         Carbon $after = null,
+        string|array $channel = null,
     ): ?NotificationLogItem {
         return $this->latestLoggedNotificationQuery(...func_get_args())->first();
     }
@@ -26,6 +27,7 @@ trait HasNotifiableHistory
         string|array $notificationTypes = null,
         Carbon $before = null,
         Carbon $after = null,
+        string|array $channel = null,
     ): Builder {
         $notificationLogClass = Config::notificationLogModelClass();
 

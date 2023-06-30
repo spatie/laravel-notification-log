@@ -55,6 +55,7 @@ class NotificationLogItem extends Model
         string|array $notificationType = null,
         Carbon $before = null,
         Carbon $after = null,
+        string|array $channel = null,
     ): ?NotificationLogItem {
         return self::latestForQuery(...func_get_args())->first();
     }
@@ -65,6 +66,7 @@ class NotificationLogItem extends Model
         string|array $notificationType = null,
         Carbon $before = null,
         Carbon $after = null,
+        string|array $channel = null,
     ): Builder {
         return self::query()
             ->where('notifiable_type', $notifiable->getMorphClass())
@@ -72,6 +74,9 @@ class NotificationLogItem extends Model
             ->when($fingerprint, fn (Builder $query) => $query->where('fingerprint', $fingerprint))
             ->when($notificationType, function (Builder $query) use ($notificationType) {
                 $query->whereIn('notification_type', Arr::wrap($notificationType));
+            })
+            ->when($channel, function (Builder $query) use ($channel) {
+                $query->whereIn('channel', Arr::wrap($channel));
             })
             ->when($before, function (Builder $query) use ($before) {
                 $query->where('created_at', '<', $before->toDateTimeString());
