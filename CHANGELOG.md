@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.1.0 - 2023-07-17
+
+### What's Changed
+
+- Add option to query channels by @pxlrbt in https://github.com/spatie/laravel-notification-log/pull/23
+
+### New Contributors
+
+- @pxlrbt made their first contribution in https://github.com/spatie/laravel-notification-log/pull/23
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.0.4...1.1.0
+
 ## 1.0.4 - 2023-05-12
 
 ### What's Changed
