@@ -125,7 +125,6 @@ it('can find a sent notification while ignoring the fingerprint', function (
     [null],
 ]);
 
-
 it('can find a sent notification with the same channel', function (
     ?string $channel,
     bool $expectedResult,

@@ -77,7 +77,6 @@ it('can find the latest sent notification for fingerprint', function () {
         ->toBeNull();
 });
 
-
 it('can find the latest sent notification for channel', function () {
     $firstChannel1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
         'channel' => 'channel-1',

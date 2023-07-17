@@ -5,7 +5,7 @@ use Spatie\NotificationLog\Tests\TestSupport\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
 
-expect()->extend('toBeModel', function (object|null $model) {
+expect()->extend('toBeModel', function (?object $model) {
     if (is_null($model)) {
         return false;
     }
