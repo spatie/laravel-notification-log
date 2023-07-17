@@ -26,6 +26,14 @@ class NotificationHistoryQueryBuilder
             );
     }
 
+    public function onChannel(string $channel): static
+    {
+        $this->query
+            ->where('channel', $channel);
+
+        return $this;
+    }
+
     public function inThePastMinutes(int $numberOfMinutes): bool
     {
         $query = $this->query

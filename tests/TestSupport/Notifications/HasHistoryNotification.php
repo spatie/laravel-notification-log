@@ -3,6 +3,7 @@
 namespace Spatie\NotificationLog\Tests\TestSupport\Notifications;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Spatie\NotificationLog\Models\Concerns\HasHistory;
 
 class HasHistoryNotification extends TestNotification
@@ -18,7 +19,10 @@ class HasHistoryNotification extends TestNotification
 
     public function historyTest($notifiable): bool
     {
-        return (self::$historyTestCallable)($notifiable);
+        return app()->call(self::$historyTestCallable, [
+            'notifiable' => $notifiable,
+            'channel' => Arr::first($this->via($notifiable)),
+        ]);
     }
 
     public function fingerprint()

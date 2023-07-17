@@ -77,6 +77,34 @@ it('can find the latest sent notification for fingerprint', function () {
         ->toBeNull();
 });
 
+
+it('can find the latest sent notification for channel', function () {
+    $firstChannel1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
+        'channel' => 'channel-1',
+    ]);
+
+    $secondChannel1 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
+        'channel' => 'channel-1',
+    ]);
+
+    $firstChannel2 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
+        'channel' => 'channel-2',
+    ]);
+
+    $secondChannel2 = NotificationLogItem::factory()->forNotifiable($this->user)->create([
+        'channel' => 'channel-2',
+    ]);
+
+    expect(NotificationLogItem::latestFor($this->user, channel: 'channel-1'))
+        ->toBeModel($secondChannel1);
+
+    expect(NotificationLogItem::latestFor($this->user, channel: 'channel-2'))
+        ->toBeModel($secondChannel2);
+
+    expect(NotificationLogItem::latestFor($this->user, channel: 'channel-3'))
+        ->toBeNull();
+});
+
 it('can find the latest notification in a certain period', function () {
     NotificationLogItem::factory()
         ->forNotifiable($this->user)
