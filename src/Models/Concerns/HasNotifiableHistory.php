@@ -39,7 +39,9 @@ trait HasNotifiableHistory
 
     public function notificationLogItems(): MorphMany
     {
-        return $this->morphMany(NotificationLogItem::class, 'notifiable')
+        $notificationLogClass = Config::notificationLogModelClass();
+
+        return $this->morphMany($notificationLogClass, 'notifiable')
             ->orderByDesc('created_at')
             ->orderByDesc($this->getKeyName());
     }
