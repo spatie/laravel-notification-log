@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.1.1 - 2023-08-10
+
+### What's Changed
+
+- Fix HasNotifiableHistory trait not using the configured model class by @FrancisMawn in https://github.com/spatie/laravel-notification-log/pull/25
+
+### New Contributors
+
+- @FrancisMawn made their first contribution in https://github.com/spatie/laravel-notification-log/pull/25
+- @dependabot made their first contribution in https://github.com/spatie/laravel-notification-log/pull/20
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.1.0...1.1.1
+
 ## 1.1.0 - 2023-07-17
 
 ### What's Changed
