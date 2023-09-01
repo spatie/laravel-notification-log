@@ -24,7 +24,11 @@ In a view, you could write this:
 </ul>
 ```
 
-The package also contains handy methods that allow you to make decisions based on the notifications sent. Here's an example, where we use the `wasAlreadySentTo` method provided by the package in a `shouldSent` method of a notification.
+The package also contains handy traits that allow:
+- Using the notifiable to search logged notifications ([HasNotifiableHistory](https://spatie.be/docs/laravel-notification-log/v1/basic-usage/querying-the-notification-log#content-using-the-notifiable-to-search-logged-notifications))
+- Determining sent notifications within a notification ([HasHistory](https://spatie.be/docs/laravel-notification-log/v1/basic-usage/querying-the-notification-log#content-determining-sent-notifications-within-a-notification))
+
+Here's an example, where we use the `wasAlreadySentTo` method provided by the package in a `shouldSent` method of a notification.
 
 ```php
 // in a notification
