@@ -9,7 +9,7 @@ use Spatie\NotificationLog\Models\Concerns\HasNotifiableHistory;
 
 class User extends BaseUser
 {
-    use Notifiable;
     use HasFactory;
     use HasNotifiableHistory;
+    use Notifiable;
 }
