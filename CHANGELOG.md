@@ -2,6 +2,26 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.2.0 - 2024-01-18
+
+### What's Changed
+
+* Update docs to add missing event parameter by @FrancisMawn in https://github.com/spatie/laravel-notification-log/pull/26
+* fix typo in file name by @aminetiyal in https://github.com/spatie/laravel-notification-log/pull/28
+* Remove unused exception_message db column by @andreasnij in https://github.com/spatie/laravel-notification-log/pull/32
+* Update introduction.md by @dwightwatson in https://github.com/spatie/laravel-notification-log/pull/33
+* Bump aglipanci/laravel-pint-action from 2.3.0 to 2.3.1 by @dependabot in https://github.com/spatie/laravel-notification-log/pull/34
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/spatie/laravel-notification-log/pull/31
+* Add history builder inThePast() method by @andreasnij in https://github.com/spatie/laravel-notification-log/pull/36
+
+### New Contributors
+
+* @aminetiyal made their first contribution in https://github.com/spatie/laravel-notification-log/pull/28
+* @andreasnij made their first contribution in https://github.com/spatie/laravel-notification-log/pull/32
+* @dwightwatson made their first contribution in https://github.com/spatie/laravel-notification-log/pull/33
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.1.1...1.2.0
+
 ## 1.1.1 - 2023-08-10
 
 ### What's Changed
