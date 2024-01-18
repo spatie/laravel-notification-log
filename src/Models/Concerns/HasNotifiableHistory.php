@@ -13,21 +13,21 @@ use Spatie\NotificationLog\Support\Config;
 trait HasNotifiableHistory
 {
     public function latestLoggedNotification(
-        string $fingerprint = null,
-        string|array $notificationTypes = null,
-        Carbon $before = null,
-        Carbon $after = null,
-        string|array $channel = null,
+        ?string $fingerprint = null,
+        string|array|null $notificationTypes = null,
+        ?Carbon $before = null,
+        ?Carbon $after = null,
+        string|array|null $channel = null,
     ): ?NotificationLogItem {
         return $this->latestLoggedNotificationQuery(...func_get_args())->first();
     }
 
     public function latestLoggedNotificationQuery(
-        string $fingerprint = null,
-        string|array $notificationTypes = null,
-        Carbon $before = null,
-        Carbon $after = null,
-        string|array $channel = null,
+        ?string $fingerprint = null,
+        string|array|null $notificationTypes = null,
+        ?Carbon $before = null,
+        ?Carbon $after = null,
+        string|array|null $channel = null,
     ): Builder {
         $notificationLogClass = Config::notificationLogModelClass();
 

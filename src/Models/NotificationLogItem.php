@@ -51,22 +51,22 @@ class NotificationLogItem extends Model
 
     public static function latestFor(
         $notifiable,
-        string $fingerprint = null,
-        string|array $notificationType = null,
-        Carbon $before = null,
-        Carbon $after = null,
-        string|array $channel = null,
+        ?string $fingerprint = null,
+        string|array|null $notificationType = null,
+        ?Carbon $before = null,
+        ?Carbon $after = null,
+        string|array|null $channel = null,
     ): ?NotificationLogItem {
         return self::latestForQuery(...func_get_args())->first();
     }
 
     public static function latestForQuery(
         $notifiable,
-        string $fingerprint = null,
-        string|array $notificationType = null,
-        Carbon $before = null,
-        Carbon $after = null,
-        string|array $channel = null,
+        ?string $fingerprint = null,
+        string|array|null $notificationType = null,
+        ?Carbon $before = null,
+        ?Carbon $after = null,
+        string|array|null $channel = null,
     ): Builder {
         return self::query()
             ->where('notifiable_type', $notifiable->getMorphClass())
