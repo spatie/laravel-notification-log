@@ -125,6 +125,32 @@ it('will not find a sent notification while ignoring the fingerprint', function 
     [null],
 ]);
 
+it('can determine if it was not sent in the past', function (
+    bool $created,
+    bool $expectedResult,
+) {
+    if ($created) {
+        NotificationLogItem::factory()
+            ->forNotifiable($this->notifiable)
+            ->create([
+                'notification_type' => HasHistoryNotification::class,
+                'created_at' => now(),
+            ]);
+    }
+
+    $hasHistoryCalls = function ($notifiable) {
+        return $this
+            ->wasNotSentTo($notifiable)
+            ->inThePast();
+    };
+
+    expect(executeClosureInNotification($hasHistoryCalls, $this->notifiable))
+        ->toBe($expectedResult);
+})->with([
+    [true, false],
+    [false, true],
+]);
+
 function executeClosureInNotification(Closure $closure, User $notifiable): bool
 {
     $closure = Closure::bind($closure, new HasHistoryNotification());

@@ -151,6 +151,32 @@ it('can find a sent notification with the same channel', function (
     ['other-channel', false],
 ]);
 
+it('can determine if it was sent in the past', function (
+    bool $created,
+    bool $expectedResult,
+) {
+    if ($created) {
+        NotificationLogItem::factory()
+            ->forNotifiable($this->notifiable)
+            ->create([
+                'notification_type' => HasHistoryNotification::class,
+                'created_at' => now(),
+            ]);
+    }
+
+    $hasHistoryCalls = function ($notifiable) {
+        return $this
+            ->wasSentTo($notifiable)
+            ->inThePast();
+    };
+
+    expect(executeInNotification($hasHistoryCalls, $this->notifiable))
+        ->toBe($expectedResult);
+})->with([
+    [true, true],
+    [false, false],
+]);
+
 function executeInNotification(Closure $closure, User $notifiable): bool
 {
     $closure = Closure::bind($closure, new HasHistoryNotification());

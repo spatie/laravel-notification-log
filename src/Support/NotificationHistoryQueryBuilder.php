@@ -34,10 +34,12 @@ class NotificationHistoryQueryBuilder
         return $this;
     }
 
-    public function inThePastMinutes(int $numberOfMinutes): bool
+    public function inThePastMinutes(?int $numberOfMinutes): bool
     {
         $query = $this->query
-            ->where('created_at', '>=', now()->subMinutes($numberOfMinutes))
+            ->when($numberOfMinutes !== null, function (Builder $query) use ($numberOfMinutes) {
+                $query->where('created_at', '>=', now()->subMinutes($numberOfMinutes));
+            })
             ->when($this->withSameFingerprint, function (Builder $query) {
                 $action = Config::convertEventToModelAction();
 
@@ -56,6 +58,11 @@ class NotificationHistoryQueryBuilder
         return $this->shouldExist
             ? $query->exists()
             : $query->doesntExist();
+    }
+
+    public function inThePast(): bool
+    {
+        return $this->inThePastMinutes(null);
     }
 
     public function query(): Builder
