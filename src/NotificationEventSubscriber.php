@@ -31,8 +31,6 @@ class NotificationEventSubscriber
         if ($logItem) {
             self::$sentNotifications[$event->notification] = $logItem;
         }
-
-        self::$sentNotifications[$event->notification] = $logItem;
     }
 
     public function handleNotificationSent(NotificationSent $event): void
