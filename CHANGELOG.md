@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.2.1 - 2024-03-01
+
+### What's Changed
+
+* Don't put falsey log item in map by @kohenkatz in https://github.com/spatie/laravel-notification-log/pull/38
+
+### New Contributors
+
+* @kohenkatz made their first contribution in https://github.com/spatie/laravel-notification-log/pull/38
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.2.0...1.2.1
+
 ## 1.2.0 - 2024-01-18
 
 ### What's Changed
