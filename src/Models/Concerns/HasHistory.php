@@ -12,8 +12,6 @@ trait HasHistory
     {
         $this->ensureNotifiableIsModel($notifiable);
 
-        $notifiable->latestLoggedNotification();
-
         return new NotificationHistoryQueryBuilder(
             $this,
             $notifiable,
