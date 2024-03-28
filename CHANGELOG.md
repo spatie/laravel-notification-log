@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.3.1 - 2024-03-28
+
+### What's Changed
+
+* Remove unnecessary method call in HasHistory by @andreasnij in https://github.com/spatie/laravel-notification-log/pull/35
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.3.0...1.3.1
+
 ## 1.3.0 - 2024-03-15
 
 ### What's Changed
