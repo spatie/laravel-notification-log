@@ -16,14 +16,14 @@ class CustomLogItem extends NotificationLogItem
 }
 ```
 
-To let the package use your model, specify it in the `class` key of the `notification-log` config file.
+To let the package use your model, specify it in the `model` key of the `notification-log` config file.
 
 ```php
 return [
     /*
      * This model will be used to log all sent notifications
      */
-    'model' => Spatie\NotificationLog\Models\NotificationLogItem::class,
+    'model' => CustomLogItem::class,
     
     // ...
 ];
