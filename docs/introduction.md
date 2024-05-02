@@ -30,7 +30,7 @@ The package also contains handy methods that allow you to make decisions based o
 public function shouldSend($notifiable)
 {
       return ! $this
-        ->wasAlreadySentTo($notifiable)
+        ->wasSentTo($notifiable)
         ->inThePastMinutes(60);
 }
 ```
