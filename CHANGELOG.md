@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.3.2 - 2025-02-19
+
+### What's Changed
+
+* Improve documentation section Using your own notification log model by @gisostallenberg in https://github.com/spatie/laravel-notification-log/pull/40
+* Bump aglipanci/laravel-pint-action from 2.3.1 to 2.5 by @dependabot in https://github.com/spatie/laravel-notification-log/pull/43
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-notification-log/pull/44
+
+### New Contributors
+
+* @gisostallenberg made their first contribution in https://github.com/spatie/laravel-notification-log/pull/40
+* @laravel-shift made their first contribution in https://github.com/spatie/laravel-notification-log/pull/44
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.3.1...1.3.2
+
 ## 1.3.1 - 2024-03-28
 
 ### What's Changed
