@@ -25,8 +25,14 @@ In a view you could write this:
 The package also contains handy methods that allow you to make decisions based on the notifications sent. Here's an example, where we use the `wasAlreadySentTo` method provided by the package in the `shouldSend` method of a notification.
 
 ```php
+use Spatie\NotificationLog\Models\Concerns\HasHistory;
+
 // in a notification
 
+// set history trait
+use HasHistory;
+
+// verifying if the queued notification can be sent based in the history
 public function shouldSend($notifiable)
 {
       return ! $this
