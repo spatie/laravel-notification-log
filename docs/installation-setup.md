@@ -37,7 +37,7 @@ return [
      * Log items older than this number of days will be automatically be removed.
      *
      * This feature uses Laravel's native pruning feature:
-     * https://laravel.com/docs/10.x/eloquent#pruning-models
+     * https://laravel.com/docs/12.x/eloquent#pruning-models
      */
     'prune_after_days' => 30,
 
@@ -67,7 +67,23 @@ return [
 
 ### Pruning results
 
-This package will store all sent notifications in the `notification_log_items` table. The related `NotificationLogItems` models uses the [Laravel's `MassPrunable` trait](https://laravel.com/docs/10.x/eloquent#mass-pruning). In the `notification-log` config file, you can specify the maximum age of a model in the `prune_after_days` key. Don't forget to schedule the `model:prune` command, as instructed in Laravel's docs. You'll have to explicitly add the model class:
+This package will store all sent notifications in the `notification_log_items` table. The related `NotificationLogItems` models uses the [Laravel's `MassPrunable` trait](https://laravel.com/docs/12.x/eloquent#mass-pruning). In the `notification-log` config file, you can specify the maximum age of a model in the `prune_after_days` key. Don't forget to schedule the `model:prune` command, as instructed in Laravel's docs. You'll have to explicitly add the model class:
+
+#### Laravel 11+
+
+```php
+// in routes/console.php
+
+use Illuminate\Support\Facades\Schedule;
+
+Schedule::command('model:prune', [
+    '--model' => [
+        \Spatie\NotificationLog\Models\NotificationLogItem::class,
+    ],
+])->daily();
+```
+
+#### Laravel 10
 
 ```php
 // in app/Console/Kernel.php

@@ -10,7 +10,7 @@ return [
      * Log items older than this number of days will be automatically be removed.
      *
      * This feature uses Laravel's native pruning feature:
-     * https://laravel.com/docs/10.x/eloquent#pruning-models
+     * https://laravel.com/docs/12.x/eloquent#pruning-models
      */
     'prune_after_days' => 30,
 
