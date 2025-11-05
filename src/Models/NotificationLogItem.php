@@ -23,11 +23,15 @@ class NotificationLogItem extends Model
         'confirmed_at' => 'datetime',
     ];
 
+    /**
+     * @return Builder<static>
+     */
     public function prunable(): Builder
     {
         $threshold = config('notification-log.prune_after_days');
 
-        return static::where('created_at', '<=', now()->subDays($threshold));
+        return static::query()
+            ->where('created_at', '<=', now()->subDays($threshold));
     }
 
     public function notifiable(): MorphTo
@@ -57,7 +61,7 @@ class NotificationLogItem extends Model
         ?Carbon $after = null,
         string|array|null $channel = null,
     ): ?NotificationLogItem {
-        return self::latestForQuery(...func_get_args())->first();
+        return static::latestForQuery(...func_get_args())->first();
     }
 
     public static function latestForQuery(
@@ -68,14 +72,15 @@ class NotificationLogItem extends Model
         ?Carbon $after = null,
         string|array|null $channel = null,
     ): Builder {
-        return self::query()
+        /** @var Builder<static> $query */
+        $query = static::query()
             ->where('notifiable_type', $notifiable->getMorphClass())
             ->where('notifiable_id', $notifiable->getKey())
-            ->when($fingerprint, fn (Builder $query) => $query->where('fingerprint', $fingerprint))
-            ->when($notificationType, function (Builder $query) use ($notificationType) {
+            ->when($fingerprint !== null, fn (Builder $query) => $query->where('fingerprint', $fingerprint))
+            ->when($notificationType !== null, function (Builder $query) use ($notificationType) {
                 $query->whereIn('notification_type', Arr::wrap($notificationType));
             })
-            ->when($channel, function (Builder $query) use ($channel) {
+            ->when($channel !== null, function (Builder $query) use ($channel) {
                 $query->whereIn('channel', Arr::wrap($channel));
             })
             ->when($before, function (Builder $query) use ($before) {
@@ -83,8 +88,12 @@ class NotificationLogItem extends Model
             })
             ->when($after, function (Builder $query) use ($after) {
                 $query->where('created_at', '>', $after->toDateTimeString());
-            })
+            });
+
+        $keyName = $query->getModel()->getKeyName();
+
+        return $query
             ->orderByDesc('created_at')
-            ->orderByDesc('id');
+            ->orderByDesc($keyName);
     }
 }

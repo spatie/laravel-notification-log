@@ -7,3 +7,4 @@ phpstan.neon
 testbench.yaml
 vendor
 node_modules
+.phpunit.cache

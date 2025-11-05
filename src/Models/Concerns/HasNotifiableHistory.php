@@ -41,8 +41,10 @@ trait HasNotifiableHistory
     {
         $notificationLogClass = Config::notificationLogModelClass();
 
+        $logKeyName = (new $notificationLogClass())->getKeyName();
+
         return $this->morphMany($notificationLogClass, 'notifiable')
             ->orderByDesc('created_at')
-            ->orderByDesc($this->getKeyName());
+            ->orderByDesc($logKeyName);
     }
 }
