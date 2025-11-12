@@ -4,13 +4,13 @@ namespace Spatie\NotificationLog\Tests\TestSupport\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\NotificationLog\Models\NotificationLogItem;
+use Spatie\NotificationLog\Tests\TestSupport\CustomNotificationLogItem;
 use Spatie\NotificationLog\Tests\TestSupport\Models\User;
 use Spatie\NotificationLog\Tests\TestSupport\Notifications\TestNotification;
 
-class NotificationLogItemFactory extends Factory
+class CustomNotificationLogItemFactory extends Factory
 {
-    public $model = NotificationLogItem::class;
+    public $model = CustomNotificationLogItem::class;
 
     public function definition(): array
     {
@@ -35,3 +35,4 @@ class NotificationLogItemFactory extends Factory
         });
     }
 }
+
