@@ -3,7 +3,7 @@ title: Handling on demand notifications
 weight: 3
 ---
 
-Laravel has a feature called "[On Demand Notifications](https://laravel.com/docs/10.x/filesystem#on-demand-disks)", that allows you to send a notification to a notifiable that is not backed by a user model.
+Laravel has a feature called "[On Demand Notifications](https://laravel.com/docs/12.x/filesystem#on-demand-disks)", that allows you to send a notification to a notifiable that is not backed by a user model.
 
 ```php
 Notification::route('mail', 'taylor@example.com')
