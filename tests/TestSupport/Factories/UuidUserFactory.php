@@ -19,4 +19,3 @@ class UuidUserFactory extends Factory
         ];
     }
 }
-

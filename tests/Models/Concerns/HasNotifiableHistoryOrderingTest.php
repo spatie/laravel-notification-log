@@ -5,8 +5,8 @@ namespace Spatie\NotificationLog\Tests\Models\Concerns;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Spatie\NotificationLog\Models\NotificationLogItem;
-use Spatie\NotificationLog\Tests\TestSupport\Models\UuidUser;
 use Spatie\NotificationLog\Tests\TestSupport\Models\User;
+use Spatie\NotificationLog\Tests\TestSupport\Models\UuidUser;
 
 beforeEach(function () {
     // Create uuid_users table for UUID-based notifiables
@@ -104,4 +104,3 @@ it('notificationLogItems maintains correct ordering when multiple items have sam
     expect($items[1]->id)->toBe($second->id);
     expect($items[2]->id)->toBe($first->id);
 });
-

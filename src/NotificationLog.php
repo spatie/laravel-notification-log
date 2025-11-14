@@ -2,6 +2,4 @@
 
 namespace Spatie\NotificationLog;
 
-class NotificationLog
-{
-}
+class NotificationLog {}

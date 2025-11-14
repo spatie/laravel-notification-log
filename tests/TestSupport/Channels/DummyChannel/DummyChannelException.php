@@ -4,6 +4,4 @@ namespace Spatie\NotificationLog\Tests\TestSupport\Channels\DummyChannel;
 
 use Exception;
 
-class DummyChannelException extends Exception
-{
-}
+class DummyChannelException extends Exception {}

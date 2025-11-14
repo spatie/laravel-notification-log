@@ -16,6 +16,6 @@ class UuidUser extends BaseUser
     use Notifiable;
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 }
-

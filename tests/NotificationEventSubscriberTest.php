@@ -20,7 +20,7 @@ beforeEach(function () {
 });
 
 it('will log a sent notification', function () {
-    $this->user->notify(new TestNotification());
+    $this->user->notify(new TestNotification);
 
     expect(NotificationLogItem::get())->toHaveCount(1);
 
@@ -35,13 +35,13 @@ it('will log a sent notification', function () {
 });
 
 it('will not log a notification that should not be logged', function () {
-    $this->user->notify(new ShouldNotLogNotification());
+    $this->user->notify(new ShouldNotLogNotification);
 
     expect(NotificationLogItem::get())->toHaveCount(0);
 });
 
 it('can log a notification that is being sent to multiple channels', function () {
-    $this->user->notify(new MultipleChannelsNotification());
+    $this->user->notify(new MultipleChannelsNotification);
 
     expect(NotificationLogItem::get())->toHaveCount(2);
 
@@ -54,13 +54,13 @@ it('can log a notification that is being sent to multiple channels', function ()
 it('can log a all notifications sent to a collection of notifiables', function () {
     $users = User::factory()->count(5)->create();
 
-    Notification::send($users, new TestNotification());
+    Notification::send($users, new TestNotification);
 
     expect(NotificationLogItem::get())->toHaveCount(5);
 });
 
 it('can log extra information', function () {
-    Notification::send($this->user, new LogExtraNotification());
+    Notification::send($this->user, new LogExtraNotification);
 
     $logItem = NotificationLogItem::first();
 
@@ -68,11 +68,11 @@ it('can log extra information', function () {
 });
 
 it('will throw an exception if the extra method returns something invalid', function () {
-    Notification::send($this->user, new InvalidLogExtraNotification());
+    Notification::send($this->user, new InvalidLogExtraNotification);
 })->throws(InvalidExtraContent::class);
 
 it('can handle an on-demand notification', function () {
-    Notification::route('mail', 'john@example.com')->notify(new TestNotification());
+    Notification::route('mail', 'john@example.com')->notify(new TestNotification);
 
     $logItem = NotificationLogItem::first();
 
@@ -82,7 +82,7 @@ it('can handle an on-demand notification', function () {
 });
 
 it('can handle a notification with a fingerprint', function () {
-    $this->user->notify(new FingerprintNotification());
+    $this->user->notify(new FingerprintNotification);
 
     $logItem = NotificationLogItem::first();
 
@@ -91,7 +91,7 @@ it('can handle a notification with a fingerprint', function () {
 
 it('will log an unsent notification when there was a problem sending it', function () {
     try {
-        $this->user->notify(new ChannelWillThrowExceptionNotification());
+        $this->user->notify(new ChannelWillThrowExceptionNotification);
     } catch (DummyChannelException) {
     }
 
@@ -101,7 +101,7 @@ it('will log an unsent notification when there was a problem sending it', functi
 });
 
 it('can log a custom notification type', function () {
-    $this->user->notify(new CustomTypeNotification());
+    $this->user->notify(new CustomTypeNotification);
 
     $logItem = NotificationLogItem::first();
 

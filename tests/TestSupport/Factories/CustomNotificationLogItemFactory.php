@@ -35,4 +35,3 @@ class CustomNotificationLogItemFactory extends Factory
         });
     }
 }
-

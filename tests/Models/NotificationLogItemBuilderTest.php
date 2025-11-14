@@ -10,7 +10,7 @@ beforeEach(function () {
 });
 
 it('prunable returns an eloquent builder instance', function () {
-    $model = new NotificationLogItem();
+    $model = new NotificationLogItem;
     $query = $model->prunable();
 
     expect($query)->toBeInstanceOf(Builder::class);
@@ -20,7 +20,7 @@ it('prunable returns an eloquent builder instance', function () {
 it('prunable works with custom notification log item models', function () {
     config()->set('notification-log.model', CustomNotificationLogItem::class);
 
-    $model = new CustomNotificationLogItem();
+    $model = new CustomNotificationLogItem;
     $query = $model->prunable();
 
     expect($query)->toBeInstanceOf(Builder::class);
@@ -38,7 +38,7 @@ it('prunable filters by created_at correctly', function () {
         ->forNotifiable($this->user)
         ->create(['created_at' => now()->subDays(29)]);
 
-    $model = new NotificationLogItem();
+    $model = new NotificationLogItem;
     $prunableItems = $model->prunable()->get();
 
     expect($prunableItems)->toHaveCount(1);
@@ -163,7 +163,7 @@ it('prunable preserves custom model scopes', function () {
             'confirmed_at' => null,
         ]);
 
-    $model = new CustomNotificationLogItem();
+    $model = new CustomNotificationLogItem;
     $prunableConfirmed = $model->prunable()->confirmed()->get();
     $prunableUnconfirmed = $model->prunable()->unconfirmed()->get();
 
@@ -194,4 +194,3 @@ it('latestForQuery preserves custom model scopes', function () {
     expect($unconfirmedResult)->not()->toBeNull();
     expect($unconfirmedResult->id)->toBe($unconfirmed->id);
 });
-

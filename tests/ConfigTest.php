@@ -21,7 +21,7 @@ it('will throw an exception when specifying an invalid action class', function (
 it('can use another event model class', function () {
     config()->set('notification-log.actions.convertEventToModel', CustomConvertEventToModelClassAction::class);
 
-    $this->user->notify(new TestNotification());
+    $this->user->notify(new TestNotification);
 
     $logItem = NotificationLogItem::first();
 
@@ -31,7 +31,7 @@ it('can use another event model class', function () {
 it('can use another notification log item model class', function () {
     config()->set('notification-log.model', CustomNotificationLogItem::class);
 
-    $this->user->notify(new TestNotification());
+    $this->user->notify(new TestNotification);
 
     $logItem = $this->user->notificationLogItems()->first();
 

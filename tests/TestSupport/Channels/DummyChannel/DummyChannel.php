@@ -11,7 +11,7 @@ class DummyChannel
         $result = $notification->toDummyChannel();
 
         if ($result === 'throw-exception') {
-            throw new DummyChannelException();
+            throw new DummyChannelException;
         }
     }
 }

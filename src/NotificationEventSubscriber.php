@@ -14,7 +14,7 @@ class NotificationEventSubscriber
     public function __construct()
     {
         if (! self::$sentNotifications) {
-            self::$sentNotifications = new WeakMap();
+            self::$sentNotifications = new WeakMap;
         }
     }
 
