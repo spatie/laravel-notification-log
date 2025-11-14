@@ -2,6 +2,29 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.3.3 - 2025-11-14
+
+### What's Changed
+
+* Update introduction.md by @WillTorres10 in https://github.com/spatie/laravel-notification-log/pull/45
+* Update issue template by @AlexVanderbist in https://github.com/spatie/laravel-notification-log/pull/50
+* Fix typo by @chrysanthos in https://github.com/spatie/laravel-notification-log/pull/52
+* Fix notification history builder return types by @imhayatunnabi in https://github.com/spatie/laravel-notification-log/pull/53
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/spatie/laravel-notification-log/pull/51
+* Bump actions/checkout from 3 to 5 by @dependabot[bot] in https://github.com/spatie/laravel-notification-log/pull/48
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/spatie/laravel-notification-log/pull/47
+* update pruning documentation for Laravel 11+ compatibility by @lukasleitsch in https://github.com/spatie/laravel-notification-log/pull/49
+
+### New Contributors
+
+* @WillTorres10 made their first contribution in https://github.com/spatie/laravel-notification-log/pull/45
+* @AlexVanderbist made their first contribution in https://github.com/spatie/laravel-notification-log/pull/50
+* @chrysanthos made their first contribution in https://github.com/spatie/laravel-notification-log/pull/52
+* @imhayatunnabi made their first contribution in https://github.com/spatie/laravel-notification-log/pull/53
+* @lukasleitsch made their first contribution in https://github.com/spatie/laravel-notification-log/pull/49
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.3.2...1.3.3
+
 ## 1.3.2 - 2025-02-19
 
 ### What's Changed
