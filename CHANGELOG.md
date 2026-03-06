@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.4.0 - 2026-03-06
+
+### What's Changed
+
+- Laravel 13.x Compatibility
+- Drop support for PHP < 8.4 and Laravel < 12
+- Update to Pest 4
+
 ## 1.3.3 - 2025-11-14
 
 ### What's Changed
