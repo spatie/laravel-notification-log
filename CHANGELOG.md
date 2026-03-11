@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-notification-log` will be documented in this file.
 
+## 1.4.1 - 2026-03-11
+
+### What's Changed
+
+* Fix incorrect method name wasAlreadySentTo → wasSentTo in docs by @briankiewel in https://github.com/spatie/laravel-notification-log/pull/57
+
+### New Contributors
+
+* @briankiewel made their first contribution in https://github.com/spatie/laravel-notification-log/pull/57
+
+**Full Changelog**: https://github.com/spatie/laravel-notification-log/compare/1.4.0...1.4.1
+
 ## 1.4.0 - 2026-03-06
 
 ### What's Changed
