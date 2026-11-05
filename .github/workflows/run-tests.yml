@@ -16,9 +16,13 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.4, 8.5]
+        php: [8.4, 8.5, 8.6]
         laravel: ['12.*', '13.*']
         stability: [prefer-stable]
+        exclude:
+          # Pest 5 requires Symfony Process 8, while Laravel 12 requires Symfony 7.
+          - php: 8.6
+            laravel: 12.*
         include:
           - laravel: 12.*
             testbench: 10.*
